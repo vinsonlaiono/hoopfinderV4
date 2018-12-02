@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HoopFinder!</title>
+    <link rel="stylesheet" href="../static/hoopfinder/css/userboot.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="dist/toolkit.min.js"></script>
+    <link href="dist/toolkit.min.css" rel="stylesheet">
+
+
+
+    <style>
+        a {
+            color: white;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(230, 237, 245)">
+    <!-- NAVIGATION -->
+    <div class="fixed-to">
+        <ul class="nav justify-content-around">
+            <nav class="navbar navbar-expand-lg " style="background-color: rgb(0, 30, 134)">
+                <a class="navbar-brand" href="#"><h2>HoopFinder!</h2></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/user/{{request.session.userid}}">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <form class="form-inline my-2 my-lg-0" action="/login_post" method="post">
+                        {% csrf_token %}
+
+                        <input class="form-control mr-sm-2" type="search" name="email" placeholder="email" aria-label="Search">
+                        <!-- <button type="submit" class="btn btn-success btn-block">Login</button> -->
+                        <input class="form-control mr-sm-2" type="search" name="password" placeholder="password" aria-label="Search">
+                        <input class="btn btn-primary my-5 my-sm-0" type="submit" value="Login">
+                    </form>
+                </div>
+            </nav>
+        </ul>
+    </div>
+    <div class="main container">
+        <div class="hero">
+            <div class="mt-2">
+                <div class="row">
+                    <div class=" col-lg-8 col-md-8 ">
+                        <div class="card card-profile">
+                            <div class="col-md-12 center-block" style="background-color: rgb(230, 237, 245)">
+                                <div class="registrationdiv">
+                                    <h3>Create a New Account</h3>
+                                    <div class="boxmargin">
+                                        <form action="/register" method="post">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span id="iconmargin1" class="input-group-addon">
+                                                        <i class="fa fa-amazon" aria-hidden="true"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control form-control-sm" name="first_name" placeholder="First Name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span id="iconmargin1" class="input-group-addon">
+                                                        <i class="fa fa-user fa" aria-hidden="true"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control form-control-sm" name="last_name" placeholder="Last Name">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-envelope fa" aria-hidden="true"></i>
+                                                    </span>
+                                                    <input type="email" class="form-control form-control-sm" name="email" placeholder="Email">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span id="iconmargin" class="input-group-addon">
+                                                        <i class="fa fa-lock fa" aria-hidden="true"></i>
+                                                    </span>
+                                                    <input type="password" class="form-control form-control-sm" name="password" placeholder="Password">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span id="iconmargin" class="input-group-addon">
+                                                        <i class="fa fa-lock fa" aria-hidden="true" class="iconmargin"></i>
+                                                    </span>
+                                                    <input type="password" class="form-control form-control-sm" name="confpassword" placeholder="Confirm Password">
+                                                </div>
+                                            </div>
+                                            <p>
+                                                <small> By clicking Register, you agree to the HoopFinder User Agreement, Privacy
+                                                    Policy, and Cookie Policy.</small>
+                                            </p>
+                                            <button type="submit" class="btn btn-primary btn-block mb-2">Register</button>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="fixed-bottom">
+        <div class="card card-link-list">
+            <div class="card-body" style="text-align: center; ">
+                © 2018 HoopFinder!
+                <a style="color: rgb(73, 77, 76)" href="#">About </a>
+                <a style="color: rgb(73, 77, 76)" href="#">Help </a>
+                <a style="color: rgb(73, 77, 76)" href="#">Terms </a>
+                <a style="color: rgb(73, 77, 76)" href="#">Privacy </a>
+                <a style="color: rgb(73, 77, 76)" href="#">Cookies </a>
+                <a style="color: rgb(73, 77, 76)" href="#">Ads </a>
+                <a style="color: rgb(73, 77, 76)" href="#">Info </a>
+                <a style="color: rgb(73, 77, 76)" href="#">Brand </a>
+                <a style="color: rgb(73, 77, 76)" href="#">Blog </a>
+                <a style="color: rgb(73, 77, 76)" href="#">Status </a>
+                <a style="color: rgb(73, 77, 76)" href="#">Apps </a>
+                <a style="color: rgb(73, 77, 76)" href="#">Jobs </a>
+                <a style="color: rgb(73, 77, 76)" href="#">Advertise</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

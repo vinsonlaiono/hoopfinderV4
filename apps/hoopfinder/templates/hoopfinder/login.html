@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HoopFinder Login</title>
+    <!-- {% load static %} -->
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'hoopfinder/css/styles.css' %}"> -->
+    <link rel="stylesheet" type="text/css" href="../../static/hoopfinder/css/styles.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="container" id="loginbody">
+            <div class="fixed-top">
+
+                    <ul class="nav justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="navItem" href="#">HOOPFINDER!</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-item nav-link active"  id="navItem"  href="/home">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-item nav-link" id="navItem"  href="/map">Maps</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-item nav-link" id="navItem"  href="/user_dashboard">Users</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-item nav-link" id="navItem"  href="/courts">Courts</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="navItem" href="#">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                                {%if request.session.userid == 0 %}
+                                <a class="nav-item nav-link" id="navItem"  href="/login">Login</a>
+                                {% else %}
+                                <a class="nav-item nav-link" id="navItem"  href="/logout">Logout</a>
+                                {% endif %}                    
+                        </li>
+                        <li>
+                            <a class="nav-item nav-link" id="navItem"  href="/user/{{request.session.userid}}">Welcome {{current_user.first_name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            
+
+
+
+        <div class="col-md-5 center-block">
+            <div class="logindiv">
+                <h3>Login</h3>
+                <div class="boxmargin">
+                    <form action="/login_post" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true" class="iconmargin"></i></span>
+                                <input type="email" class="form-control form-control-sm" name="email" placeholder="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span id="iconmargin" class="input-group-addon"><i class="fa fa-lock fa" aria-hidden="true" class="iconmargin"></i></span>
+                                <input type="password" class="form-control form-control-sm" name="password" placeholder="password">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Login</button>
+                    </form>
+                </div>
+            </div> 
+        </div>       
+        
+        
+    </div>  <!-- end of container -->
+    
+</body>
+</html>

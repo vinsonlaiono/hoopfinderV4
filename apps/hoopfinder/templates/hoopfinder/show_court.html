@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HoopFinder</title>
+        <!-- {% load static %} -->
+        <!-- <link rel="stylesheet" type="text/css" href="{% static 'hoopfinder/css/styles.css' %}"> -->
+        <link rel="stylesheet" type="text/css" href="../../static/hoopfinder/css/styles.css">
+    
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        
+    </head>
+    <body>
+
+        <!-- make the navigation bar on its own file and just attach it in every page -->
+    
+        <div class="container" id="courtsbody">
+            <div class = "navigationbar">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <a class="navbar-brand" href="#">HoopFinder!</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                        <a class="nav-item nav-link active" href="/home">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link" href="/map">Maps</a>
+                        <a class="nav-item nav-link" href="/user_dashboard">Users</a>
+                        <a class="nav-item nav-link" href="/courts">Courts</a>
+                        <a class="nav-item nav-link" href="/registration">Register</a>
+
+                        {%if request.session.userid == 0 %}
+                        <a class="nav-item nav-link" href="/login">Login</a>
+                        {% else %}
+                        <a class="nav-item nav-link" href="/logout">Logout</a>
+                        {% endif %}
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+
+            <!-- API pulling current weather depends on the zipcode of the location of the court -->
+            <div class="col-lg-12" id="weatherdiv">
+                    <img id="temperatureicon" src="http://openweathermap.org/img/w/{{icon}}.png" alt="">
+                    <p id="temperaturep" class="text-capitalize">{{ftemperature|floatformat:2}}°F {{description}}</p> 
+            </div>
+        
+
+            <div class="showcourtmaindiv">
+                <div class ="row">
+                    <div class="col-lg-3" id="leftcontentcourt">
+                        <div class="userinfodiv">
+                            <div class="userpicture">
+                                <img class="usericon" src="../static/hoopfinder/img/usericon.png">
+                            </div>
+                            <div class="userinfo">
+                                <p class="text-capitalize">Name: {{user.first_name}} {{user.last_name}}</p>
+                                <p>Location: San Jose, CA</p>
+                                <p>Rating:
+                                    <!-- run a for loop to and iterate it depends on the ratings. floor.math -->
+                                <img class = "ratingball" src="../static/hoopfinder/img/ball.png">
+                                <img class = "ratingball" src="../static/hoopfinder/img/ball.png">
+                                <img class = "ratingball" src="../static/hoopfinder/img/ball.png">
+                                <img class = "ratingball" src="../static/hoopfinder/img/ball.png">
+                                <img class = "ratingball" src="../static/hoopfinder/img/ball.png">
+                                <p>Reviews: 5</p>
+                            </div>
+                        </div>
+                        <script>
+                            // This example requires the Places library. Include the libraries=places
+                            // parameter when you first load the API. For example:
+                            // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+                      
+                            var map;
+                            var infowindow;
+                      
+                            function initMap() {
+                              var pyrmont = {lat: 37.376628, lng: -121.909902};
+                      
+                              map = new google.maps.Map(document.getElementById('map'), {
+                                center: pyrmont,
+                                zoom: 13
+                              });
+                      
+                              infowindow = new google.maps.InfoWindow();
+                              var service = new google.maps.places.PlacesService(map);
+                              service.nearbySearch({
+                                location: pyrmont,
+                                radius: 100000,
+                                type: ['park']
+                              }, callback);
+                            }
+                      
+                            function callback(results, status) {
+                              if (status === google.maps.places.PlacesServiceStatus.OK) {
+                                for (var i = 0; i < results.length; i++) {
+                                  createMarker(results[i]);
+                                }
+                              }
+                            }
+                      
+                            function createMarker(place) {
+                              var placeLoc = place.geometry.location;
+                              var marker = new google.maps.Marker({
+                                map: map,
+                                position: place.geometry.location
+                              });
+                      
+                              google.maps.event.addListener(marker, 'click', function() {
+                                infowindow.setContent(place.name);
+                                infowindow.open(map, this);
+                              });
+                            }
+                          </script>
+
+
+                        <br>
+
+                    <div id="map" >
+                            <iframe
+                            width="260"
+                            height="310"
+                            frameborder="0" style="border:0"
+                            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAZ_3ojpys3Eq9gHR51t6VpYbNpTo1GMwg&q={{court.address}}, {{court.city}}" allowfullscreen>
+                            
+                                             
+                        
+                          </iframe>
+                    </div>
+                        <p>location: {{court.address}}, {{court.city}}, {{court.state}}. {{court.zipcode}}</p>
+
+                    </div>
+
+                    <div class="col-lg-6" id="maincontentcourt">
+                        <div class="courtimagediv">
+                            <img id="courtimg" src ="{{court.imagelink}}" alt="">
+                        </div>
+                        <div class="maincontenttext">
+                            <p class="text-capitalize">Court's Name: {{court.name}}</p>
+                            <p>Rating:
+                            <img class = "ratingball2" src="../static/hoopfinder/img/ball2.png">
+                            <img class = "ratingball2" src="../static/hoopfinder/img/ball2.png">
+                            <img class = "ratingball2" src="../static/hoopfinder/img/ball2.png">
+                            <img class = "ratingball2" src="../static/hoopfinder/img/ball2.png">
+                            <img class = "ratingball2" src="../static/hoopfinder/img/ball2.png">
+                        </div>
+
+                        <div class="courtreviewdiv">
+                        <!-- gets all the reviews for the courts -->
+                        {% for x in reviews %}
+                        <div class="rowreview">
+                                <div class="reviewauthor">
+                                    <div class="reviewauthorimage">
+                                        <img class="reviewimage" src="../static/hoopfinder/img/usericon2.png" alt="">
+                                    </div>
+                                    <p class ="userreviewname"><a class ="text-capitalize" href="/user/{{x.court_review_by.id}}">{{x.court_review_by.first_name}} {{ x.court_review_by.last_name|slice:"1" }}.</a></p>
+                                    <p>San Jose, CA</p>
+                                    <p>Rating: ★★★★★</p>
+                                </div>
+                                <div class="reviewtext">
+                                    <div class="reviewratedate">
+                                        <div class="reviewstar">
+                                        {% if x.rating == 1 %}
+                                        <p class="star"> ★</p>
+                                        {%  elif x.rating == 2 %}
+                                            <p class="star"></p> ★★</p>
+                                        {% elif x.rating == 3 %}
+                                            <p class="star"> ★★★</p>
+                                        {%  elif x.rating == 4 %}
+                                            <p class="star"> ★★★★</p>
+                                        {%  elif x.rating == 5 %}
+                                            <p class="star">  ★★★★★</p>
+                                        {%endif%}
+                                        </div>
+                                        <div class="reviewdate">
+                                            <p>{{x.created_at}}</p> 
+                                        </div>
+                                    </div>
+                                    <p>{{x.court_review}}</p>
+                                    {% if x.court_review_by.id == request.session.userid %}
+                                    <form action="/delete_review/{{x.id}}/{{ user.id }}" method="post">
+                                        {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm float-right">Delete</button>
+                                    </form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <div class="reviewbox">
+                                <form action="/review_court" method="post">
+                                {% csrf_token %}
+                                    <label class="reviewlabel">Write a review:</label>
+                                    <div class="radios">
+                                        <label class="radio-inline"><input type="radio" name="optrating" value="1"> 1 star</label>
+                                        <label class="radio-inline"><input type="radio" name="optrating" value="2"> 2 stars</label>
+                                        <label class="radio-inline"><input type="radio" name="optrating" value="3"> 3 stars</label>
+                                        <label class="radio-inline"><input type="radio" name="optrating" value="4"> 4 stars</label>
+                                        <label class="radio-inline"><input type="radio" name="optrating" value="5"> 5 stars</label>
+                                    </div>    
+                                    <div class="form-group">
+                                        <textarea id="reviewtextarea" class="form-control" style="font-size: 14px" name="courtreview" rows="3"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-dark btn-sm float-right">Submit</button>      
+                                </form>
+                            </div>
+                        </div>   <!--end of courtreviewdiv-->
+                    </div>   <!-- end of maincontentcourt -->
+
+                    <div class="col-lg-3" id="rightcontentcourt">
+                        <div class="playersonline">
+                            <!-- hard coded number, change it later -->
+                            <p>Online Hoopers: 5</p> 
+                            <form action="/checkin" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-dark btn-sm">Check In</button>
+                            </form>
+                            
+                        </div>
+                        <div class="currentplayersonline">
+                            <p>Current Online Hoopers:</p>
+                            <ul>
+                                <!-- {% for y in checkedinusers %}
+                                <li class="text-capitalize">{{y.first_name}}  {{y.last_name}}       *****</li>
+                                {% endfor %} -->
+                                <li>Steph Curry</li>
+                                <li>Kevin Durant</li>
+                                <li>Lebron James</li>
+                                <li>Carmelo Anthony</li>
+        
+                            </ul>
+                        </div>
+                        <div class="courtevent">                                  
+                            <div style="display: inline-block">
+                                <br>
+                                <div id="accordion" style="width:255px;" >
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne" style="background-color: #343a40; color: white">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" style=" color: white" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                    Upcoming Events
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <table>
+                                                    {% for event in created_events %}
+                                                    <tr>
+                                                        <div class="eventbuttons" style="margin-bottom: 5px;">
+                                                            <a href="/events/{{event.id}}" class="btn btn-outline-dark btn-sm btn-block">{{event.name}} {{event.date}}</a>
+                                                        </div> 
+                                                    </tr>
+                                                    {% endfor %}
+                                                </table>
+                                            </div>
+                                        </div>                
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne" style="background-color: #343a40;">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                    <span  style=" color: white">Create an Event</span>
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                            <form action="/add_event/{{ court.id }}" method="post">
+                                                {% csrf_token %}
+                                                <div class="card-body" style="padding: 5px 5px 5px 5px">
+                                                    <div class="input-group input-group-sm mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm">Name:</span>
+                                                        </div>
+                                                        <input type="text" class="form-control" name="title" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                    </div>
+                                                    <div class="input-group input-group-sm mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm">Date:</span>
+                                                        </div>
+                                                        <input type="date" class="form-control"  name ="date" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                    </div>
+                                                    <div class="input-group input-group-sm mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="inputGroup-sizing-sm">Time:</span>
+                                                        </div>
+                                                        <input type="time" class="form-control" name ="time"  aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                                                    </div>
+                                                </div>
+                                                <input type="submit" class="btn btn-outline-dark btn-sm btn-block" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="Submit">
+                                            </form>
+                                        </div>
+                                    </div> 
+                                </div>
+                           </div> 
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>      <!-- end of container -->
+        </body>
+    </html>
+        
+
+
+
+
+
+<!-- 49a76676e913deb3805b87568bba047f      -------- api key for open weather -->
+
+<!-- http://api.openweathermap.org/data/2.5/weather?appid=49a76676e913deb3805b87568bba047f&zip=94040 -->
