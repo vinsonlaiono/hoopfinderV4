@@ -1,14 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import *
-# from django.db import models
-# from django.contrib.auth.models import User
+from django.db import models
+from django.contrib.auth.models import User
 import json
-import requests
-
-# Create your views here.
-
-# MAKE AN EDIT USER page
-
+# import request, random
 
 def index(request):
     return render(request, "hoopfinder/landing.html")
