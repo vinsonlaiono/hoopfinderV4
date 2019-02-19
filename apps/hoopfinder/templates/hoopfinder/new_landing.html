@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HoopFinder</title>
+    <link rel="stylesheet" type="text/css" href="../../static/hoopfinder/css/landing.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+
+    <link rel="stylesheet" href="../static/hoopfinder/css/userboot.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="dist/toolkit.min.js"></script>
+    <link href="dist/toolkit.min.css" rel="stylesheet">
+    <!-- SweetAlert CDN -->
+    {% load static %}
+    <script src="{% static 'hoopfinder/js/sweetalert.js' %}"></script>
+    <script src="{% static 'hoopfinder/dist/sweetalert2.all.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+    <script src="/apps/hoopfinder/static/hoopfinder/js/sweetalert.js"></script>
+
+    <script>
+
+    </script>
+</head>
+
+<body>
+    <div class="pos-f-t">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-dark p-4">
+                <h5 class="text-white h4">Collapsed content</h5>
+                <span class="text-muted">Toggleable via the navbar brand.</span>
+            </div>
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
+                aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <h4 class="h3"><a href="/" class="text-decoration-none text-white">Hoops</a></h4>
+            <div>
+                <button id="login" class="btn btn-secondary mr-2">Login</button>
+                <button class="btn btn-secondary mr-2" data-toggle="modal" data-target="#exampleModal">Sign Up</button>
+            </div>
+        </nav>
+    </div>
+    <div id="landing-header">
+        <h1>Welcome to Hoops</h1>
+        <a href="/home" class="btn btn-lg btn-secondary">Check The Courts</a>
+    </div>
+
+    <div class="modal modal-fade-transform: scale(.8) fade" id="exampleModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Register</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- ====================== -->
+                    <!-- BEGINNING OF FORM -->
+                    <!-- ====================== -->
+                    <form action="/register" method="POST" id="regForm">
+                        <!-- FIRST NAME VALIDATION ---------------------------------------------------------------- -->
+
+                        <div class="form-group">
+                            <input type="text" name="fname" class="form-control" value="" placeholder="First Name">
+                        </div>
+
+                        <!-- LAST NAME VALIDATION ---------------------------------------------------------------- -->
+
+                        <div class="form-group">
+                            <input type="text" name="lname" class="form-control" value="" placeholder="Last Name">
+                        </div>
+                        <!-- EMAIL VALIDATION ------------------------------------------------------------------------ -->
+
+                        <div class="form-group">
+                            <input type="text" name="email" id="email" class="form-control" value="" placeholder="Email">
+                        </div>
+                        <!-- PASSWORD ERROR ----------------------------------------------------------------------- -->
+
+                        <div class="form-group">
+                            <input type="text" name="password" class="form-control" value="" placeholder="Password">
+                        </div>
+                        <!-- CONFRIM PASSWORD ERROR ----------------------------------------------------------------------- -->
+
+                        <div class="form-group">
+                            <input type="text" name="confpassword" class="form-control" value="" placeholder="Confirm Password">
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <input type="submit" value="Register" class="btn btn-primary">
+
+                        </div>
+                    </form>
+                    <!-- ====================== -->
+                    <!-- END OF FORM -->
+                    <!-- ====================== -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

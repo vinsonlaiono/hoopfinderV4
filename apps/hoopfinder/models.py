@@ -1,7 +1,7 @@
 from django.db import models
 # from django.core.validators import RegexValidator
 import re
-# import bcrypt
+import bcrypt
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 # Create your models here.
@@ -44,10 +44,9 @@ class UserManager(models.Manager):
             if bcrypt.checkpw(postData['password'].encode(), user.password.encode()):
                 print("password match")
             else:
-                print('--------faild to login')
+                print('--------faild tp login')
                 errors['login'] = "Failed to login"
         return errors 
-
 
 # build a validator for adding new courts
 
@@ -56,8 +55,8 @@ class User(models.Model):
     last_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
-    user_icon = models.CharField(max_length=255)
-    position = models.CharField(max_length=255)
+    # users player information
+    position = models.CharField(max_length=255, default=" ")
     age = models.CharField(max_length=255, default=" ")
     feet = models.CharField(max_length=255, default=" ")
     inches = models.CharField(max_length=255, default=" ")
@@ -67,31 +66,6 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
 
-# class Friend(models.Model):
-#     friend = models.ForeignKey(User, null=True)
-#     friended_by = models.ForeignKey(User, related_name="users_friends", null=True)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-class Friend (models.Model):
-    users = models.ManyToManyField(User)
-    current_user = models.ForeignKey(User, related_name='owner')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    # @classmethod
-    def make_friend(cls, current_user, new_friend):
-        friend, create = cls.objects.get_or_create(
-            current_user = current_user
-        )
-        friend.users.add(new_friend)
-    
-    def remove_friend(cls, current_user, new_friend):
-        friend, create = cls.objects.get_or_create(
-            current_user = current_user
-        )
-        friend.users.remove(new_friend)
-
-
 class Courts(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=75)
@@ -99,7 +73,7 @@ class Courts(models.Model):
     state = models.CharField(max_length=2)
     zipcode = models.CharField(max_length=5)
     imagelink = models.CharField(max_length=100)
-    # checked_in_user = models.ForeignKey(User, related_name="checked_into")
+    checked_in_user = models.ForeignKey(User, related_name="checked_into")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -111,18 +85,3 @@ class Court_Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class UserReviews(models.Model):
-    review = models.TextField()
-    reviewed_user = models.ForeignKey(User, related_name="personal_reviews")
-    reviewed_by = models.ForeignKey(User, related_name="user_reviews")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-class Event(models.Model):
-    name = models.CharField(max_length=255)
-    date = models.DateField()
-    time = models.CharField(max_length=255)
-    court = models.ForeignKey(Courts, related_name="court_events")
-    created_by = models.ForeignKey(User, related_name="created_events")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
