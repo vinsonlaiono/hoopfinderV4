@@ -19,4 +19,5 @@ urlpatterns = [
     url(r'^courts/(?P<id>\d+)$', views.show_court),
     # new routes after
     url(r'^user/(?P<user_id>\d+)$', views.user_page),
+    url(r'^add_user_review$', views.add_user_review),
 ] 

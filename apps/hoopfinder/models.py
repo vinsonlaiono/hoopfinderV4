@@ -38,13 +38,14 @@ class UserManager(models.Manager):
         users = User.objects.filter(email=email)
         if len(users) == 0:
             errors['failed'] = "failed to login"
+            print(errors['failed'])
         else:
             user = users[0]
             print(user.password)
             if bcrypt.checkpw(postData['password'].encode(), user.password.encode()):
                 print("password match")
             else:
-                print('--------faild tp login')
+                print('--------faild to login')
                 errors['login'] = "Failed to login"
         return errors 
 
@@ -85,3 +86,9 @@ class Court_Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+class UserReviews(models.Model):
+    review = models.TextField()
+    reviewed_user = models.ForeignKey(User, related_name="personal_reviews")
+    reviewed_by = models.ForeignKey(User, related_name="user_reviews")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>user test</title>
+    <title>Hoops</title>
     <link rel="stylesheet" href="../static/hoopfinder/css/userboot.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
@@ -22,12 +22,12 @@
 </head>
 <body>
     <div class="fixed-top">
-        <nav class="nav justify-content-center" style="background-color: rgb(0, 30, 134)"> 
+        <nav class="nav justify-content-center navbar navbar-dark bg-dark"> 
+            <li class="nav-item">
+                <a class="nav-link active float-left" id="navItem" href="/home">HOOPS</a>
+            </li>
 
-            <ul class="nav" style="background-color: transparent">
-                <li class="nav-item">
-                    <a class="nav-link active" id="navItem" href="/home">HOOPFINDER!</a>
-                </li>
+            <ul class="nav" style="background-color: transparent"></ul>
                 <li class="nav-item">
                     <a class="nav-item nav-link active"  id="navItem"  href="/user/{{request.session.userid}}">Home <span class="sr-only">(current)</span></a>
                 </li>
@@ -49,7 +49,7 @@
                     {% endif %}                    
                 </li>
                 <li>
-                    <a class="nav-item nav-link" id="navItem"  href="/user/{{request.session.userid}}">Welcome {{current_user.first_name}}</a>
+                    <a class="nav-item nav-link" id="navItem"  href="/user/{{request.session.userid}}">Welcome <span class="text-capitalize"> {{user.first_name}}</span></a>
                 </li>
             </ul>
         </nav>
@@ -130,16 +130,16 @@
                                                     <div class="form-group">
                                                         <legend class="legendpsize">Height: </legend>
                                                         <label  class="col-lg-2">Feet: </label>
-                                                        <input type="number"  class="col-lg-3" class="form-control" name="feet" id="feet">
+                                                        <input type="number" class="form-control col-lg-3 d-inline-block" name="feet" id="feet">
                                                         <label  class="col-lg-2">Inches:</label>
-                                                        <input type="number"  class="col-lg-3" class="form-control" name="inches" id="inches">
+                                                        <input type="number" class="form-control col-lg-3 d-inline-block" name="inches" id="inches">
                                                     </div>
                                                     <div class="form-group">
                                                         <legend class="legendpsize">Location:</legend>
                                                         <label class="col-lg-2">City</label>
-                                                        <input type="text" class="col-lg-3" class="form-control" name="city" id="city">
+                                                        <input type="text" class="form-control col-lg-3 d-inline-block" name="city" id="city">
                                                         <label class="col-lg-2">State</label>
-                                                        <input type="text" class="col-lg-3" class="form-control" name="state" id="state">
+                                                        <input type="text" class="form-control col-lg-3 d-inline-block" name="state" id="state">
                                                     </div>
                                                 </div>
                                             </div>

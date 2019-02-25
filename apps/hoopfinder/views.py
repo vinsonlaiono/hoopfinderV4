@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import *
+from django.contrib import messages
 import json
 import requests
 
@@ -22,7 +23,7 @@ def home(request):
 def map(request):
     return render(request, "hoopfinder/maps.html")
     
-def userdashboard(request):
+def userdashboard(request): 
     
     return render(request, "hoopfinder/userbootstrap.html")
 
@@ -44,18 +45,13 @@ def register(request):
                 messages.error(request, value)
             return redirect('/registration')
         else:
-            request.session['first_name'] = request.POST['first_name']
-            first_name = request.POST['first_name']
-            last_name = request.POST['last_name']
-            email = request.POST['email']
-            password = request.POST['password']
-
             #BCRYPT
-            pw = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
-            confpassword = request.POST['confpassword']
-           
+            pw = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
             #create an account and push it to the database
-            user2 = User.objects.create(first_name = first_name, last_name =last_name, email = email, password = pw)
+            user2 = User.objects.create(first_name = request.POST['first_name'], 
+                                        last_name = request.POST['first_name'], 
+                                        email = request.POST['email'], 
+                                        password = pw)
             request.session['userid'] = user2.id
             
             # change this to userdashboard
@@ -77,11 +73,11 @@ def login_post(request):
             request.session['userid'] = user1.id
             # change this to user dashboard
             print("youre logged in " + user1.first_name)
-            return redirect('/home')
+            return redirect('/user/'+str(user1.id))
 
 def logout(request):
     request.session.clear()
-    return redirect('/')
+    return redirect('/home')
 
 def new_court(request):
     return render(request, "hoopfinder/new_court.html")
@@ -148,6 +144,20 @@ def review_court(request):
         id = request.session['userid']
         return redirect('/courts/' + str(id))
 
+def add_user_review(request):
+    if request.method == 'POST':
+        
+        reviewer = User.objects.get(id = request.session['userid'])
+        reviewed_user = User.objects.get(id = request.POST['reviewed_user'])
+        id = request.POST['reviewed_user']
+        review = request.POST['review']
+        print(id, "this is the id ***************")
+
+        UserReviews.objects.create(review = review, reviewed_user = reviewed_user, reviewed_by = reviewer)
+
+        return redirect("/user/"+id)
+
+
 def checkin(request):
     if request.method =='POST':
         id = request.session['userid']
@@ -157,12 +167,20 @@ def checkin(request):
         # court.save()
         return redirect('/courts/' + str(id))
 # Routes after cleanup
-def user_page(request, user_id):
-    user = User.objects.get(id = user_id)
-    
-    print(user, "***********************")
 
-    context= {
-        'user': user,
-    }
-    return render(request, "hoopfinder/userbootstrap.html", context)
+#-------------------
+# Renders users page
+#-------------------
+def user_page(request, user_id):
+    if 'userid' == 0:
+        return redirect('/home')
+    else:
+        user = User.objects.get(id = user_id)
+        user_reviews = UserReviews.objects.filter(reviewed_user = User.objects.get(id = user_id))
+        
+        print(user, "***********************")
+        context= {
+            'user': user,
+            'user_reviews': user_reviews,
+        }
+        return render(request, "hoopfinder/userbootstrap.html", context)
