@@ -48,15 +48,14 @@ def register(request):
             #BCRYPT
             pw = bcrypt.hashpw(request.POST['password'].encode(), bcrypt.gensalt())
             #create an account and push it to the database
-            user2 = User.objects.create(first_name = request.POST['first_name'], 
-                                        last_name = request.POST['first_name'], 
+            user2 = User.objects.create(first_name = request.POST['fname'], 
+                                        last_name = request.POST['lname'], 
                                         email = request.POST['email'], 
                                         password = pw)
             request.session['userid'] = user2.id
             
             # change this to userdashboard
-            return redirect('/home')
-
+            return redirect('/user/'+str(request.session['userid']))
 
 def login(request):
     return render(request, "hoopfinder/login.html")
@@ -105,7 +104,6 @@ def show_court(request, id):
     ftemperature = (temperature*9)/5 - 459.67
     reviews = Court_Review.objects.filter(court_reviewed = court)
     checkedinusers = User.objects.filter(checked_into = court)
-
 
     context = {
         # "city": json_data['sys'][0]['name'],
@@ -157,7 +155,6 @@ def add_user_review(request):
 
         return redirect("/user/"+id)
 
-
 def checkin(request):
     if request.method =='POST':
         id = request.session['userid']
@@ -166,17 +163,19 @@ def checkin(request):
         # court.checked_in_user.add(user)
         # court.save()
         return redirect('/courts/' + str(id))
+
 # Routes after cleanup
 
 #-------------------
 # Renders users page
 #-------------------
 def user_page(request, user_id):
-    if 'userid' == 0:
+    print("User id in session is: " + str(request.session['userid']))
+    if request.session['userid'] == 0:
         return redirect('/home')
     else:
         user = User.objects.get(id = user_id)
-        user_reviews = UserReviews.objects.filter(reviewed_user = User.objects.get(id = user_id))
+        user_reviews = UserReviews.objects.filter(reviewed_user = User.objects.get(id = user_id)).order_by('-created_at')
         
         print(user, "***********************")
         context= {
@@ -184,3 +183,13 @@ def user_page(request, user_id):
             'user_reviews': user_reviews,
         }
         return render(request, "hoopfinder/userbootstrap.html", context)
+#-------------------
+# Post route to delete users reviews
+#-------------------
+def delete_player_review(request, id, userid):
+    print("In post route to delete a users reviews")
+    if request.method == 'GET':
+        review = UserReviews.objects.get(id = id)
+        print("users review: ",  review)
+        review.delete()
+    return redirect('/user/' + userid)

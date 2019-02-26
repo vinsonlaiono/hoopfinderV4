@@ -127,8 +127,8 @@
                     <!-- BEGINNING OF FORM -->
                     <!-- ====================== -->
                     <form action="/register" method="POST" id="regForm">
+                        {% csrf_token %}
                         <!-- FIRST NAME VALIDATION ---------------------------------------------------------------- -->
-
                         <div class="form-group">
                             <input type="text" name="fname" class="form-control" value="" placeholder="First Name">
                         </div>

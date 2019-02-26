@@ -9,24 +9,30 @@ class UserManager(models.Manager):
     def basic_validator(self, postData):
         errors = {}
         # First name validates length
-        if len(postData['first_name']) < 2:
+        if len(postData['fname']) < 2:
             errors["firstname"] = "First name must be at least 2 characters"
+            print(errors["firstname"])
         # Last name validates length
-        if len(postData['last_name']) < 2:
+        if len(postData['lname']) < 2:
             errors["lastname"] = "Last name must be at least 2 characters"
+            print(errors["lastname"])
         # Email validates length
         if len(postData['email']) < 1:
             errors["email"] = "Email cannot be empty"
+            print(errors["email"])
         email_check  = User.objects.filter(email = postData['email'])
         # Email validate if email exits
         if email_check:
             errors["email_check"] = "Email already exits"
+            print(errors["email_check"])
         # Email validates valid email
         elif not EMAIL_REGEX.match(postData['email']):
             errors['valid_email'] = "Please enter a valid email"
+            print(errors['valid_email'])
         # Password check length of password
         if len(postData['password']) < 8:
             errors["password"] = "Password must contain at least 9 characters"
+            print(errors["password"])
         # Password check matching password
         if postData['password'] != postData['confpassword']: 
             errors['confpassword'] = "Passwords do not match"
@@ -45,7 +51,7 @@ class UserManager(models.Manager):
             if bcrypt.checkpw(postData['password'].encode(), user.password.encode()):
                 print("password match")
             else:
-                print('--------faild to login')
+                print('--------faild to login password does not match')
                 errors['login'] = "Failed to login"
         return errors 
 

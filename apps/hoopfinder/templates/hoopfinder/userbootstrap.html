@@ -247,7 +247,7 @@
                         <h6><a class ="text-capitalize" href="/user/{{x.reviewed_by.id}}">{{x.reviewed_by.first_name}} {{ x.reviewed_by.last_name|slice:"1" }}.</a></h6>
                         <small>{{x.review}}</small>
                         {% if x.reviewed_by.id == request.session.userid %}
-                            <a href="/delete_player_review/{{x.id}}/{{ user.id }}"><p><small class="text-muted">delete review</small></p></a>
+                            <a href="/review/delete/{{x.id}}/{{ user.id }}"><p><small class="text-muted">delete review</small></p></a>
                         {% endif %}
                     </div>
                 </div>
