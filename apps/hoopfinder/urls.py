@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 from . import views           # This line is new!
 urlpatterns = [
-    url(r'^$', views.index),  
+    url(r'^djan$', views.index),  
     url(r'^home$', views.home),  
     url(r'^courts$', views.courts),
     url(r'^map$', views.map),
