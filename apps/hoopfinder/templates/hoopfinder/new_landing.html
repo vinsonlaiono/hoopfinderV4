@@ -56,8 +56,13 @@
             </button>
             <h4 class="h3"><a href="/" class="text-decoration-none text-white">Hoops</a></h4>
             <div>
+                {% if request.session.userid == 0 %}
                 <button class="btn btn-secondary mr-2" data-toggle="modal" data-target="#loginModal">Login</button>
                 <button class="btn btn-secondary mr-2" data-toggle="modal" data-target="#exampleModal">Sign Up</button>
+                {% else %}
+                <a href="/user/{{ request.session.userid }}" class="btn btn-secondary mr-2">Home</a>
+                <a href="/logout" class="btn btn-secondary mr-2">Log out</a>
+                {% endif %}
             </div>
         </nav>
     </div>
@@ -82,7 +87,6 @@
                     <form action="/login_post" method="POST" id="regForm">
                         {% csrf_token %}
                         <!-- EMAIL VALIDATION ------------------------------------------------------------------------ -->
-
                         <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true" class="iconmargin"></i></span>
@@ -96,7 +100,6 @@
                                     <input type="password" class="form-control form-control-sm" name="password" placeholder="password">
                                 </div>
                             </div>
-                       
                         <!-- CONFRIM PASSWORD ERROR ----------------------------------------------------------------------- -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

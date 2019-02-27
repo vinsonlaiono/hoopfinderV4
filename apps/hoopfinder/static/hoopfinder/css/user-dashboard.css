@@ -1,3 +1,7 @@
+.wrapper{
+    margin-top: 90px;
+}
+
 .main{
     border: 1px solid;
     min-height: 400px;
@@ -27,11 +31,17 @@
     margin: 5px;
     padding: 15px;
 }
-.nav-item{
-    margin:5px;
-}
+/* .nav-item{
+    margin:2px;
+    font-size: 24px
+} */
 .carousel {
     position: relative;
     width: 1000px;
     margin: auto;
+}
+#user_icon{
+    height:50px; 
+    width:50px; 
+    border-radius: 50px;
 }

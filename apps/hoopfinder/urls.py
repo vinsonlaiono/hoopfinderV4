@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^user/(?P<user_id>\d+)$', views.user_page),
     url(r'^add_user_review$', views.add_user_review),
     url(r'^review/delete/(?P<id>\d+)/(?P<userid>\d+)$', views.delete_player_review),
+    url(r'^user_dashboard$', views.userdashboard),
 ] 

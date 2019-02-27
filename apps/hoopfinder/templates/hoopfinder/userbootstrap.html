@@ -1,153 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hoops</title>
+    <title>Hoops!</title>
     <link rel="stylesheet" href="../static/hoopfinder/css/userboot.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="dist/toolkit.min.js"></script>
     <link href="dist/toolkit.min.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="../static/hoopfinder/img/usericon2.png"> -->
+    {% load static %}
+    <!-- LOAD all sweet alert -->
+    <script src="{% static 'hoopfinder/js/sweetalert.js' %}"></script>
+    <script src="{% static 'user/dist' %}"></script>
+    <script src="{% static 'hoopfinder/dist/sweetalert2.all.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+    <script src="/apps/hoopfinder/static/hoopfinder/js/sweetalert.js"></script>
+
 
 </head>
+
 <body>
     <div class="fixed-top">
-        <nav class="nav justify-content-center navbar navbar-dark bg-dark"> 
-            <li class="nav-item">
-                <a class="nav-link active float-left" id="navItem" href="/home">HOOPS</a>
+        <nav class="nav justify-content-around navbar navbar-dark bg-dark">
+            <li class="nav-item" style="margin-right:10%">
+                <a class="nav-link active" id="navItem" href="/home">HOOPS</a>
             </li>
-
-            <ul class="nav" style="background-color: transparent"></ul>
-                <li class="nav-item">
-                    <a class="nav-item nav-link active"  id="navItem"  href="/user/{{request.session.userid}}">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-item nav-link" id="navItem"  href="/map">Maps</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-item nav-link" id="navItem"  href="/user_dashboard">Users</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-item nav-link" id="navItem"  href="/courts">Courts</a>
-                </li>
-                
-                <li class="nav-item">
-                    {%if request.session.userid == 0 %}
-                    <a class="nav-item nav-link" id="navItem"  href="/login">Login</a>
-                    {% else %}
-                    <a class="nav-item nav-link" id="navItem"  href="/logout">Logout</a>
-                    {% endif %}                    
-                </li>
-                <li>
-                    <a class="nav-item nav-link" id="navItem"  href="/user/{{request.session.userid}}">Welcome <span class="text-capitalize"> {{user.first_name}}</span></a>
-                </li>
-            </ul>
+            <li>
+                <div class="dropdown">
+                    <a class="btn btn-dark dropdown-toggle text-capitalize" href="#" role="button" id="dropdownMenuLink"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ loggedInUser.first_name }} {{ loggedInUser.last_name }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="/user/{{request.session.userid}}">Home</span></a>
+                        <a class="dropdown-item" href="/user_dashboard">Users</a>
+                        <a class="dropdown-item" href="#">Account Settings</a>
+                        <a class="dropdown-item" href="/courts">Courts</a>
+                        <a class="dropdown-item" href="/map">Maps</a>
+                        {%if request.session.userid == 0 %}
+                        <a class="dropdown-item" href="/login">Login</a>
+                        {% else %}
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </li>
         </nav>
     </div>
 
-    <div class="container d-flex justify-content-around">
+    <div class="container d-flex justify-content-around" style="margin-top:70px">
         <div class="left col-4" style="max-width: 25%">
             <div class="align-self-baseline" style="margin:10px;">
-                <div class="mt-2">
+                <div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="card card-profile">
-                                <div class="card-header" style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxyHKKiDj7LpLKA6boJdh_H2sK68f4nFF_T-idl7L0rPFMB1INhQ); height: 100px"></div>
+                                <div class="card-header"
+                                    style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxyHKKiDj7LpLKA6boJdh_H2sK68f4nFF_T-idl7L0rPFMB1INhQ); height: 100px">
+                                </div>
                                 <div class="card-body text-xs-center" style="text-align: center">
-                                    <img class="card-profile-img rounded mx-auto d-block" style="margin: auto;height:75px; width:75px; border-radius: 50px; align-self: auto;" src="../../static/hoopfinder/img/usericon.png">
-                                    <h5 class="text-capitalize" >{{user.first_name}} {{user.last_name}}</h5>
+                                    <img class="card-profile-img rounded mx-auto d-block"
+                                        style="margin: auto;height:75px; width:75px; border-radius: 50px; align-self: auto;"
+                                        src="../../static/hoopfinder/img/usericon.png">
+                                    <h5 class="text-capitalize">{{user.first_name}} {{user.last_name}}</h5>
                                     <!-- <h5 class="text-capitalize" style="text-align: center">Stephen Curry</h5> -->
-                                    <p class="mb-4" ><small>Big belly rude boy, million dollar hustler. Unemployed.</small></p>
+                                    <p class="mb-4"><small>Big belly rude boy, million dollar hustler.
+                                            Unemployed.</small></p>
                                     {% if request.session.userid != user.id %}
                                     <button class="btn btn-outline-primary btn-sm">
                                         <span class="icon icon-add-user"></span> Follow
                                     </button>
                                     <button class="btn btn-outline-primary btn-sm">
-                                    <span>
-                                        <a class="icon icon-add-user" href="/add_friend/{{user.id}}">Add to favorite list</a>
-                                    </span>
+                                        <span>
+                                            <a class="icon icon-add-user" href="/add_friend/{{user.id}}">Add to favorite
+                                                list</a>
+                                        </span>
                                     </button>
                                     {% endif %}
                                 </div>
                             </div>
-                            </div>
                         </div>
                     </div>
+                </div>
                 <div class="mt-2">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="card card-profile">
-                                    <div class="card-body text-xs-center">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="card card-profile">
+                                <div class="card-body text-xs-center">
                                     <!-- Check if this is the current loggedin user to allow the user to edit the page -->
                                     {% if request.session.userid == user.id %}
-                                   
-                                    <h5 class="card-title">About - <a href=""  data-toggle="modal" data-target="#exampleModalLong"><small > Edit</small></a> </h5>
+
+                                    <h5 class="card-title">About - <a href="" data-toggle="modal"
+                                            data-target="#exampleModalLong"><small> Edit</small></a> </h5>
 
                                     <!-- Module created from bootstrap that will allow the user to edit the users about me categories -->
-                                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="modal-title" id="aboutme">About me</h5> <!-- add background color to the header tag. make card header a darker color-->
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </div>
-                                            <div class="modal-body">
-                                            <!-- body to edit the about me -->
-                                                <div class="profileformdiv">
-                                                    <div class="form-group">
-                                                        <legend>Select a profile icon:</legend>
-                                                        <label class="radio-inline"><input type="radio" name="optprofileimage" value="../../static/hoopfinder/img/usericon2.png"><img class="profileselect" src="../../static/hoopfinder/img/usericon2.png"></label>
-                                                        <label class="radio-inline"><input type="radio" name="optprofileimage" value="../../static/hoopfinder/img/usericon3.png"><img class="profileselect" src="../../static/hoopfinder/img/usericon3.png"></label>
-                                                        <label class="radio-inline"><input type="radio" name="optprofileimage" value="../../static/hoopfinder/img/usericon4.png"><img class="profileselect" src="../../static/hoopfinder/img/usericon4.png"></label>
-                                                        <label class="radio-inline"><input type="radio" name="optprofileimage" value="../../static/hoopfinder/img/usericon.png"><img class="profileselect" src="../../static/hoopfinder/img/usericon.png"></label>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Position: </label>
-                                                        <select class="form-control" name="position" id="position">
-                                                            <option>Point Guard</option>
-                                                            <option>Shooting Guard</option>
-                                                            <option>Small Forward</option>
-                                                            <option>Power Forward</option>
-                                                            <option>Center</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Age: </label>
-                                                        <input type="number" class="form-control" name="age" id="age">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <legend class="legendpsize">Height: </legend>
-                                                        <label  class="col-lg-2">Feet: </label>
-                                                        <input type="number" class="form-control col-lg-3 d-inline-block" name="feet" id="feet">
-                                                        <label  class="col-lg-2">Inches:</label>
-                                                        <input type="number" class="form-control col-lg-3 d-inline-block" name="inches" id="inches">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <legend class="legendpsize">Location:</legend>
-                                                        <label class="col-lg-2">City</label>
-                                                        <input type="text" class="form-control col-lg-3 d-inline-block" name="city" id="city">
-                                                        <label class="col-lg-2">State</label>
-                                                        <input type="text" class="form-control col-lg-3 d-inline-block" name="state" id="state">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="aboutme">About me</h5>
+                                                    <!-- add background color to the header tag. make card header a darker color-->
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- body to edit the about me -->
+                                                    <div class="profileformdiv">
+                                                        <div class="form-group">
+                                                            <legend>Select a profile icon:</legend>
+                                                            <label class="radio-inline"><input type="radio"
+                                                                    name="optprofileimage"
+                                                                    value="../../static/hoopfinder/img/usericon2.png"><img
+                                                                    class="profileselect"
+                                                                    src="../../static/hoopfinder/img/usericon2.png"></label>
+                                                            <label class="radio-inline"><input type="radio"
+                                                                    name="optprofileimage"
+                                                                    value="../../static/hoopfinder/img/usericon3.png"><img
+                                                                    class="profileselect"
+                                                                    src="../../static/hoopfinder/img/usericon3.png"></label>
+                                                            <label class="radio-inline"><input type="radio"
+                                                                    name="optprofileimage"
+                                                                    value="../../static/hoopfinder/img/usericon4.png"><img
+                                                                    class="profileselect"
+                                                                    src="../../static/hoopfinder/img/usericon4.png"></label>
+                                                            <label class="radio-inline"><input type="radio"
+                                                                    name="optprofileimage"
+                                                                    value="../../static/hoopfinder/img/usericon.png"><img
+                                                                    class="profileselect"
+                                                                    src="../../static/hoopfinder/img/usericon.png"></label>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Position: </label>
+                                                            <select class="form-control" name="position" id="position">
+                                                                <option>Point Guard</option>
+                                                                <option>Shooting Guard</option>
+                                                                <option>Small Forward</option>
+                                                                <option>Power Forward</option>
+                                                                <option>Center</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Age: </label>
+                                                            <input type="number" class="form-control" name="age"
+                                                                id="age">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <legend class="legendpsize">Height: </legend>
+                                                            <label class="col-lg-2">Feet: </label>
+                                                            <input type="number"
+                                                                class="form-control col-lg-3 d-inline-block" name="feet"
+                                                                id="feet">
+                                                            <label class="col-lg-2">Inches:</label>
+                                                            <input type="number"
+                                                                class="form-control col-lg-3 d-inline-block"
+                                                                name="inches" id="inches">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <legend class="legendpsize">Location:</legend>
+                                                            <label class="col-lg-2">City</label>
+                                                            <input type="text"
+                                                                class="form-control col-lg-3 d-inline-block" name="city"
+                                                                id="city">
+                                                            <label class="col-lg-2">State</label>
+                                                            <input type="text"
+                                                                class="form-control col-lg-3 d-inline-block"
+                                                                name="state" id="state">
+                                                        </div>
                                                     </div>
                                                 </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                                </div>
                                             </div>
-                                            <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                        </div>
                                         </div>
                                     </div>
 
@@ -159,20 +210,20 @@
                                     <div class="user_info">
                                         <div style="display: inline-block;">
                                             <ul class="li">
-                                                <li >
-                                                    <span class="glyphicon glyphicon-user"></span> Age - 
+                                                <li>
+                                                    <span class="glyphicon glyphicon-user"></span> Age -
                                                 </li>
-                                                <li >
-                                                    <span class="glyphicon glyphicon-user"></span> Position - 
+                                                <li>
+                                                    <span class="glyphicon glyphicon-user"></span> Position -
                                                 </li>
-                                                <li >
-                                                    <span class="glyphicon glyphicon-user"></span> Height - 
+                                                <li>
+                                                    <span class="glyphicon glyphicon-user"></span> Height -
                                                 </li>
-                                                <li >
-                                                    <span class="glyphicon glyphicon-user"></span> Location - 
+                                                <li>
+                                                    <span class="glyphicon glyphicon-user"></span> Location -
                                                 </li>
-                                                <li >
-                                                    <span class="glyphicon glyphicon-user"></span> Member since - 
+                                                <li>
+                                                    <span class="glyphicon glyphicon-user"></span> Member since -
                                                 </li>
                                             </ul>
                                         </div>
@@ -193,12 +244,15 @@
                                         {% for friend in friends %}
                                         <li class="list-group-item">
                                             <div class="media w-100">
-                                                    <img class="friendicon" src="../../static/hoopfinder/img/usericon.png" style="height: 40px; width: 40px;" alt="">
+                                                <img class="friendicon" src="../../static/hoopfinder/img/usericon.png"
+                                                    style="height: 40px; width: 40px;" alt="">
                                                 <div class="media-body align-self-center">
                                                     <button class="btn btn-outline-primary btn-sm float-right">
-                                                    <span class="icon icon-add-user"></span> Follow
+                                                        <span class="icon icon-add-user"></span> Follow
                                                     </button>
-                                                    <a class="text-capitalize" href="/user/{{friend.id}}"><p class="text-center">{{friend.first_name}}</p></a>
+                                                    <a class="text-capitalize" href="/user/{{friend.id}}">
+                                                        <p class="text-center">{{friend.first_name}}</p>
+                                                    </a>
                                                     <!-- <small>@fat - San Francisco</small> -->
                                                 </div>
                                             </div>
@@ -214,21 +268,24 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="col-6">
             <ul class="media-list media-list-stream mb-3">
                 <li class="media list-group-item p-4" style="margin-top: 10px;">
+                    {% if request.session.userid != user.id %}
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                             <div class="reviewbox">
                                 <form action="/add_user_review" method="post">
                                     {% csrf_token %}
                                     <div class="rating">
-                                    <span> ☆ </span><span>☆ </span><span>☆ </span><span>☆ </span><span> ☆</span> :reyalp siht etaR
+                                        <span> ☆ </span><span>☆ </span><span>☆ </span><span>☆ </span><span> ☆</span>
+                                        :reyalp siht etaR
                                     </div>
-                                        <div class="input-group mb-3">
-                                            <textarea type="text" class="form-control" name="review" style="width: 318px;" placeholder="Leave a review..."></textarea>
-                                            <div class="input-group-append">
+                                    <div class="input-group mb-3">
+                                        <textarea type="text" class="form-control" name="review" style="width: 318px;"
+                                            placeholder="Leave a review..."></textarea>
+                                        <div class="input-group-append">
                                             <button class="btn btn-outline-secondary" type="submit">Post</button>
                                         </div>
                                     </div>
@@ -237,115 +294,195 @@
                             </div>
                         </div>
                     </div>
-            {% for x in user_reviews %}
-            <div class="review" style="border-bottom: 1px solid gainsboro; padding-top: 10px; padding-bottom: 10px;">
+                    {% for x in user_reviews %}
 
-                <img class="reviewimage" src="../static/hoopfinder/img/usericon2.png" alt="" style="width: 13%; height: 13%; display: inline-block; vertical-align: top;">
-                <div class="media-body" style="display: inline">
-                    <div class="media-heading" style="display: inline-block ;width: 85%;">
-                        <small class="float-right text-muted">{{x.created_at}}</small>
-                        <h6><a class ="text-capitalize" href="/user/{{x.reviewed_by.id}}">{{x.reviewed_by.first_name}} {{ x.reviewed_by.last_name|slice:"1" }}.</a></h6>
-                        <small>{{x.review}}</small>
-                        {% if x.reviewed_by.id == request.session.userid %}
-                            <a href="/review/delete/{{x.id}}/{{ user.id }}"><p><small class="text-muted">delete review</small></p></a>
-                        {% endif %}
+                    <div class="review"
+                        style="border-bottom: 1px solid gainsboro; padding-top: 10px; padding-bottom: 10px;">
+
+                        <img class="reviewimage" src="../static/hoopfinder/img/usericon2.png" alt=""
+                            style="width: 13%; height: 13%; display: inline-block; vertical-align: top;">
+                        <div class="media-body" style="display: inline">
+                            <div class="media-heading" style="display: inline-block ;width: 85%;">
+                                <small class="float-right text-muted">{{x.created_at}}</small>
+                                <h6><a class="text-capitalize"
+                                        href="/user/{{x.reviewed_by.id}}">{{x.reviewed_by.first_name}}
+                                        {{ x.reviewed_by.last_name|slice:"1" }}.</a></h6>
+                                <small>{{x.review}}</small>
+                                {% if x.reviewed_by.id == request.session.userid %}
+                                <!-- <a href="/review/delete/{{x.id}}/{{ user.id }}" id="delete_review"><p><small class="text-muted" id="delete_review">delete review</small></p></a> -->
+                                <a href="/review/delete/{{x.id}}/{{ user.id }}" id="delete_review" class="float-right">
+                                    <p><small class="text-muted" id="delete_review"><img
+                                                src="../../static/hoopfinder/img/trash-icon.jpg" alt=""
+                                                style="width: 20px; height:20px;"></small></p>
+                                </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reviewtext">
+                        <div class="reviewratedate">
+                            <div class="reviewstar">
+                                {% if x.rating == 1 %}
+                                <small>
+                                    <p class="star"> ★</p>
+                                </small>
+                                {%  elif x.rating == 2 %}
+                                <small>
+                                    <p class="star"></p> ★★</p>
+                                </small>
+                                {% elif x.rating == 3 %}
+                                <small>
+                                    <p class="star"> ★★★</p>
+                                </small>
+                                {%  elif x.rating == 4 %}
+                                <small>
+                                    <p class="star"> ★★★★</p>
+                                </small>
+                                {%  elif x.rating == 5 %}
+                                <small>
+                                    <p class="star"> ★★★★★</p>
+                                </small>
+                                {%endif%}
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="card">
+                            <h5 class="card-header p-4 text-center">Review Feed</h5>
+                        </div>
+                        {% for x in all_reviews %}
+                        <div class="review mt-4"
+                            style="border-bottom: 1px solid gainsboro; padding-top: 10px; padding-bottom: 10px;">
+                            <img class="reviewimage" src="../static/hoopfinder/img/usericon2.png" alt=""
+                                style="width: 13%; height: 13%; display: inline-block; vertical-align: top;">
+                            <div class="media-body" style="display: inline">
+                                <div class="media-heading" style="display: inline-block ;width: 85%;">
+                                    <small class="float-right text-muted">{{x.created_at}}</small>
+                                    <h6><a class="text-capitalize"
+                                            href="/user/{{x.reviewed_by.id}}">{{x.reviewed_by.first_name}}
+                                            {{ x.reviewed_by.last_name|slice:"1" }}.</a><small class="text-muted">
+                                            reviewed <span class="text-capitalize"> {{ x.reviewed_user.first_name }}
+                                                {{ x.reviewed_user.last_name|slice:"1" }}</span></small></h6>
+                                    <small>{{x.review}}</small>
+                                    {% if x.reviewed_by.id == request.session.userid %}
+                                    <!-- <a href="/review/delete/{{x.id}}/{{ user.id }}" id="delete_review"
+                                        class="float-right">
+                                        <p><small class="text-muted" id="delete_review"><img src="../../static/hoopfinder/img/trash-icon.jpg" alt="" style="width: 20px; height:20px;"></small></p>
+                                    </a> -->
+                                    <img class="delete_review" url="/review/delete/{{x.id}}/{{ user.id }}" src="../../static/hoopfinder/img/trash-icon.jpg" style="width: 20px; height:20px;">
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="reviewtext">
+                            <div class="reviewratedate">
+                                <div class="reviewstar">
+                                    {% if x.rating == 1 %}
+                                    <small>
+                                        <p class="star"> ★</p>
+                                    </small>
+                                    {%  elif x.rating == 2 %}
+                                    <small>
+                                        <p class="star"></p> ★★</p>
+                                    </small>
+                                    {% elif x.rating == 3 %}
+                                    <small>
+                                        <p class="star"> ★★★</p>
+                                    </small>
+                                    {%  elif x.rating == 4 %}
+                                    <small>
+                                        <p class="star"> ★★★★</p>
+                                    </small>
+                                    {%  elif x.rating == 5 %}
+                                    <small>
+                                        <p class="star"> ★★★★★</p>
+                                    </small>
+                                    {%endif%}
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-4">
+            <div style="margin: 10px;">
+                <div id="accordion" style="width: 300px;">
+                    <div class="card">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                    aria-expanded="true" aria-controls="collapseOne">
+                                    Top Five Courts
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                            data-parent="#accordion">
+                            <div class="card-body">
+                                <table>
+                                    <tr>
+                                        <!-- needs to be update dynamically-->
+                                        <td>Flickenger </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Brokaw</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Zanker Parkinglot</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Main Street</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Casey Court</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
+                                    Top Five Players
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+                                <table>
+                                    <tr>
+                                        <td>Vinson </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Daryll</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alex</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jacky</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Greg</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="reviewtext">
-                    <div class="reviewratedate">
-                        <div class="reviewstar">
-                        {% if x.rating == 1 %}
-                        <small><p class="star"> ★</p></small>
-                        {%  elif x.rating == 2 %}
-                            <small><p class="star"></p> ★★</p></small>
-                        {% elif x.rating == 3 %}
-                            <small><p class="star"> ★★★</p></small>
-                        {%  elif x.rating == 4 %}
-                            <small><p class="star"> ★★★★</p></small>
-                        {%  elif x.rating == 5 %}
-                            <small><p class="star">  ★★★★★</p></small>
-                        {%endif%}
-                    </div>
-                </div>
-        {% endfor %}
-        </li>
-        </ul>
         </div>
-              
-        <div class="col-4">
-            
-                <div style="margin: 10px;">
-                        <div id="accordion" style="width: 300px;" >
-                            <div class="card">
-                                <div class="card-header" id="headingOne">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            Top Five Courts
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <table>
-                                            <tr> <!-- needs to be update dynamically-->
-                                                <td>Flickenger </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Brokaw</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Zanker Parkinglot</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Main Street</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Casey Court</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-header" id="headingTwo">
-                                    <h5 class="mb-0">
-                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            Top Five Players
-                                        </button>
-                                    </h5>
-                                </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                    <div class="card-body">
-                                        <table>
-                                            <tr>
-                                                <td>Vinson </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Daryll</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Alex</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jacky</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Greg</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>                
-                            </div>               
-                        </div>
-                   </div>
-        </div>
-              
+
     </div>
     <div class="card card-link-list">
         <div class="card-body" style="text-align: center;">
             © 2018 HoopFinder!
-        
+
             <a href="#">About </a>
             <a href="#">Help </a>
             <a href="#">Terms </a>
@@ -361,5 +498,8 @@
             <a href="#">Advertise</a>
         </div>
     </div>
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias porro a facere debitis quod possimus incidunt at!
+    Veniam dignissimos earum iste nostrum eius dicta deleniti minima. Laudantium quibusdam doloribus ipsa!
 </body>
+
 </html>

@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Users</title>
     <link rel="stylesheet" href="../static/hoopfinder/css/userboot.css">
+    <link rel="stylesheet" href="../static/hoopfinder/css/user-dashboard.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
@@ -28,40 +29,35 @@
 </head>
 
 <body>
-    <div class="fixed-top">
-        <ul class="nav justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link active" id="navItem" href="#">HOOPFINDER!</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-item nav-link active" id="navItem" href="/home">Home
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-item nav-link" id="navItem" href="/map">Maps</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-item nav-link" id="navItem" href="/user_dashboard">Users</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-item nav-link" id="navItem" href="/courts">Courts</a>
-            </li>
-
-            <li class="nav-item">
-                {%if request.session.userid == 0 %}
-                <a class="nav-item nav-link" id="navItem" href="/login">Login</a>
-                {% else %}
-                <a class="nav-item nav-link" id="navItem" href="/logout">Logout</a>
-                {% endif %}
-            </li>
-            <li>
-                <a class="nav-item nav-link" id="navItem" href="/user/{{request.session.userid}}"></a>
-            </li>
-        </ul>
-    </div>
+        <div class="fixed-top">
+            <nav class="nav justify-content-around navbar navbar-dark bg-dark"> 
+                <li class="nav-item" style="margin-right:10%"> 
+                    <a class="nav-link active" id="navItem" href="/home">HOOPS</a>
+                </li>
+                <li>
+                    <div class="dropdown">
+                        <a class="btn btn-dark dropdown-toggle text-capitalize" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ loggedInUser.first_name }} {{ loggedInUser.last_name }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="/user/{{request.session.userid}}">Home</span></a>
+                            <a class="dropdown-item" href="/user_dashboard">Users</a>                           
+                            <a class="dropdown-item" href="#">Account Settings</a>
+                            <a class="dropdown-item" href="/courts">Courts</a>
+                            <a class="dropdown-item" href="/map">Maps</a>
+                            {%if request.session.userid == 0 %}
+                            <a class="dropdown-item" href="/login">Login</a>
+                            {% else %}
+                            <a class="dropdown-item" href="/logout">Logout</a>
+                            {% endif %}   
+                        </div>
+                    </div>
+                </li>
+            </nav>
+        </div>
     <!-- end of nav bar -->
-    <div class="container">
+
+    <div class="container wrapper">
         <div class="row justify-content-center">
             <div class="col-6">
                 <div class="left-col">
@@ -70,7 +66,7 @@
                             <h5 class="card-title">Newest Members</h5>
                         </div>
                         <div class="card-body">
-                            {% for users in all_users %}
+                            {% for users in all_new_users %}
                             <div style="display: inline-block; vertical-align: middle; margin: 10px;">
                                 <img src="../../static/hoopfinder/img/usericon.png" alt="" style="height:50px; width:50px; border-radius: 50px;">
                                 <a href="user/{{users.id}}">
@@ -94,7 +90,7 @@
                                 {% for users in all_users %}
                                 <tr>
                                     <td>
-                                        <img src="../../static/hoopfinder/img/usericon2.png" alt="" style="height:50px; width:50px; border-radius: 50px;">
+                                        <img id="user_icon" src="../../static/hoopfinder/img/usericon2.png" alt="" >
                                     </td>
                                     <td style="text-align:left">
                                         <a href="user/{{users.id}}">

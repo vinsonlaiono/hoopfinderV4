@@ -140,7 +140,7 @@ def review_court(request):
         user = User.objects.get(id = request.session['userid'])
         review = Court_Review.objects.create(court_review = courtreview, rating = rate, court_reviewed = court, court_review_by = user)
         id = request.session['userid']
-        return redirect('/courts/' + str(id))
+        return redirect('/courts/' + str(request.session['courtid']))
 
 def add_user_review(request):
     if request.method == 'POST':
@@ -164,7 +164,7 @@ def checkin(request):
         # court.save()
         return redirect('/courts/' + str(id))
 
-# Routes after cleanup
+# Routes after cleanup ================================
 
 #-------------------
 # Renders users page
@@ -174,15 +174,19 @@ def user_page(request, user_id):
     if request.session['userid'] == 0:
         return redirect('/home')
     else:
+        loggedInUser = User.objects.get(id=request.session['userid'])
         user = User.objects.get(id = user_id)
         user_reviews = UserReviews.objects.filter(reviewed_user = User.objects.get(id = user_id)).order_by('-created_at')
-        
+        all_reviews = UserReviews.objects.order_by('-created_at')
         print(user, "***********************")
         context= {
             'user': user,
             'user_reviews': user_reviews,
+            'loggedInUser' : loggedInUser,
+            'all_reviews': all_reviews
         }
         return render(request, "hoopfinder/userbootstrap.html", context)
+        
 #-------------------
 # Post route to delete users reviews
 #-------------------
@@ -193,3 +197,18 @@ def delete_player_review(request, id, userid):
         print("users review: ",  review)
         review.delete()
     return redirect('/user/' + userid)
+
+#-------------------
+# Renders page to show all users/hoopers
+#-------------------
+def userdashboard(request):
+    loggedInUser = User.objects.get(id=request.session['userid'])
+    all_users = User.objects.all()
+    all_new_users = User.objects.order_by('-created_at')[:9]
+    print(all_users, "***********************")
+    context= {
+        'loggedInUser' : loggedInUser,
+        'all_users': all_users,
+        'all_new_users': all_new_users
+    }
+    return render(request, "hoopfinder/usersNew.html", context)
