@@ -50,7 +50,11 @@ def home_test(request):
 #  RENDER MAP PAGE
 #------------------------------------
 def map(request):
-    return render(request, "hoopfinder/maps.html")
+    loggedInUser = User.objects.get(id=request.session['userid'])
+    context= {
+        'loggedInUser' : loggedInUser
+    }
+    return render(request, "hoopfinder/maps.html", context)
 
 # -----------------------------------
 #  RENDER USER_DASHBOARD PAGE

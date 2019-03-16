@@ -47,6 +47,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="sweetalert2.min.js"></script>
+    
     <script src="../../static/hoopfinder/js/sweetalert.js"></script>
 
     <style>
@@ -164,13 +165,12 @@
             <div class="col-md-3 col-sm-0">
                 <div class="card card-profile">
                     <div class="card-header rounded"
-                        style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxyHKKiDj7LpLKA6boJdh_H2sK68f4nFF_T-idl7L0rPFMB1INhQ); height: 100px">
+                        style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxyHKKiDj7LpLKA6boJdh_H2sK68f4nFF_T-idl7L0rPFMB1INhQ); height: 200px;">
                     </div>
-                    <div class="card-body">
+                    <div class="card-body mt-4">
                         <img class="card-profile-img img-rounded mx-auto d-block profile_pic"
                             style="margin: auto; height:100px; width:100px; border-radius: 50px; align-self: auto;"
                             src="../../static/hoopfinder/img/profile_img/user-15.jpg">
-                        <div id="editProfilePic" style="display:none;">Edit profile picture</div>
 
                         <div class="h5 text-capitalize text-center mb-4 mt-2">{{ user.first_name }} {{user.last_name}}
                         </div>
@@ -185,6 +185,7 @@
                         </div>
                         {% endif %}
                     </div>
+                
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <a href="" class="h6 text-muted"><i class="fa fa-users mr-3" id="licons"></i>
