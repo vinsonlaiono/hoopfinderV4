@@ -16,8 +16,12 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf.urls import url, include  # Notice we added include  
+# from django.urls import path
+# from apps.hoopfinder.views import Papayas, PapayaDetails
 
 urlpatterns = [
+    # path( 'papaya', Papayas.as_view() ),    
+    # path( 'papaya/<int:papaya_id>', PapayaDetails.as_view() ),
     url(r'^', include('apps.hoopfinder.urls')),
     url(r'^hoopfinder/', include('apps.hoopfinder.urls')),
     url(r'^admin/', admin.site.urls)

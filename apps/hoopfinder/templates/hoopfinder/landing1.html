@@ -28,7 +28,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="dist/toolkit.min.js"></script>
     <link href="dist/toolkit.min.css" rel="stylesheet">
-    
     <!-- <link rel="stylesheet" href="../static/hoopfinder/img/usericon2.png"> -->
     {% load static %}
     <!-- LOAD all sweet alert -->
@@ -100,7 +99,7 @@
                                     </button>
                                     <button class="btn btn-outline-primary btn-sm">
                                         <span>
-                                            <a class="glyphicon glyphicon-thumbs-up" href="/add_friend/{{user.id}}">Add to favorite list</a>
+                                            <a class="icon icon-add-user" href="/add_friend/{{user.id}}">Add to favorite list</a>
                                         </span>
                                     </button>
                                     {% endif %}
@@ -274,32 +273,8 @@
             </div>
         </div>
 
-
-        
-
-        <div class="col-6" >
-            <ul class="media-list media-list-stream mb-3" style="overflow: scroll">
-                    <div class="input-group mb-3">
-                            <div class="input-group-append">
-                                <div class="reviewbox">
-                                    <form action="/add_user_review" method="post">
-                                        {% csrf_token %}
-                                        <div class="rating">
-                                            <span> ☆ </span><span>☆ </span><span>☆ </span><span>☆ </span><span> ☆</span>
-                                            :reyalp siht etaR
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <textarea type="text" class="form-control" name="review" style="width: 318px;"
-                                                placeholder="Leave a review..."></textarea>
-                                            <div class="input-group-append">
-                                                <button class="btn btn-outline-secondary" type="submit">Post</button>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="reviewed_user" value="{{user.id}}">
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+        <div class="col-6">
+            <ul class="media-list media-list-stream mb-3">
                 <li class="media list-group-item p-4" style="margin-top: 10px;">
                     {% if request.session.userid != user.id %}
                     <div class="input-group mb-3">
@@ -376,10 +351,8 @@
                         </div>
                         {% endfor %}
                         {% else %}
-                        
                         <div class="card">
                             <h5 class="card-header p-4 text-center">Review Feed</h5>
-                            
                         </div>
                         {% for x in all_reviews %}
                         <div class="review mt-4"
@@ -442,7 +415,7 @@
             <ul class="media-list media-list-users list-group" style="margin:10px;">
                     <li class="list-group-item">
                       <div class="media w-100">
-                        <img class="media-object rounded-circle mr-3" src="../../static/hoopfinder/img/profile_img/avatar-fat.jpg">
+                        <img class="media-object rounded-circle mr-3" src="../../static/hoopfinder/img/usericon2.png">
                         <div class="media-body align-self-center">
                           <button class="btn btn-outline-primary btn-sm float-right">
                             <span class="icon icon-add-user"></span> Follow
@@ -454,7 +427,7 @@
                     </li>
                     <li class="list-group-item">
                       <div class="media w-100">
-                        <img class="media-object rounded-circle mr-3" src="../../static/hoopfinder/img/profile_img/avatar-mdo.png">
+                        <img class="media-object rounded-circle mr-3" src="../../static/hoopfinder/img/usericon3.png">
                         <div class="media-body align-self-center">
                           <button class="btn btn-outline-primary btn-sm float-right">
                             <span class="icon icon-add-user"></span> Follow

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hoops</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/darkly/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-w+8Gqjk9Cuo6XH9HKHG5t5I1VR4YBNdPt/29vwgfZR485eoEJZ8rJRbm3TR32P6k" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../../static/hoopfinder/css/searchbar.css">
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="dist/toolkit.min.js"></script>
+    <link href="dist/toolkit.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!------ Load Static Files  -->
+    {% load static %}
+    <script src="{% static 'hoopfinder/js/sweetalert.js' %}"></script>
+    <script src="{% static 'user/dist' %}"></script>
+    <script src="{% static 'hoopfinder/dist/sweetalert2.all.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+    <script src="../../static/hoopfinder/js/sweetalert.js"></script>
+
+    <style>
+        body {
+            background-color: #eeeeee;
+        }
+
+        .h7 {
+            font-size: 0.8rem;
+        }
+
+        .gedf-wrapper {
+            margin-top: 6rem;
+        }
+
+        @media (max-width: 1023px) {
+            #side_nav {
+                width: 250px;
+                position: fixed;
+                z-index: 1;
+                left: 89px;
+                left: 24px;
+            }
+        }
+
+        /* css for Large size */
+        @media (min-width: 992px) {
+            .gedf-main {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .gedf-card {
+                margin-bottom: 1rem;
+            }
+        }
+        
+        /* css for Medium size */
+        @media (max-width: 991px) {
+            .h6 {
+                font-size: 0.7rem;
+            }
+        }
+        
+        /* css for Small size */
+        @media (max-width: 750px) {
+            .h6 {
+                font-size: 1.5rem;
+            }
+
+            .gedf-card {
+                margin-bottom: 1rem;
+            }
+
+            .list-group {
+                margin-top: 1rem;
+            }
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+
+        /**Reset Bootstrap*/
+        .dropdown-toggle::after {
+            content: none;
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="fixed-top">
+        <nav class="navbar navbar-dark bg-dark justify-content-around">
+            <div class="container">
+                <a href="#" class="navbar-brand">Hoops</a>
+                <form class="form-inline">
+                    <div class="input-group">
+                        <div class="searchbar">
+                            <input class="search_input text-white" type="text" name="" placeholder="Search...">
+                            <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
+                        </div>
+                        <div class="dropdown mt-2 ml-2">
+                            <a class="btn btn-dark dropdown-toggle text-capitalize" href="#" role="button"
+                                id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ loggedInUser.first_name }} {{ loggedInUser.last_name }}
+                            </a>
+                            <input type="hidden" id="user_id" value="{{ loggedInUser.id }}">
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="/user/{{request.session.userid}}"><i
+                                        class="fa fa-home mr-2"></i>Home</span></a>
+                                <a class="dropdown-item" href="/user_dashboard"><i
+                                        class="fa fa-users mr-2"></i>Users</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-gear mr-2"></i>Account Settings</a>
+                                <a class="dropdown-item" href="/courts"><i
+                                        class="fa fa-basketball-ball mr-2"></i>Courts</a>
+                                <a class="dropdown-item" href="/map"><i class="fa fa-map-marked mr-2"></i>Maps</a>
+                                {% if request.session.userid == 0 %}
+                                <a class="dropdown-item" href="/login">Login</a>
+                                {% else %}
+                                <a class="dropdown-item" href="/logout"> <i
+                                        class="fa fa-sign-out-alt mr-2"></i>Logout</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
+    <div class="container gedf-wrapper">
+        <div class="row">
+            <!-- <div class="col-md-3"></div> -->
+            <div class="col-md-3 col-sm-0">
+                <div class="card card-profile">
+                    <div class="card-header rounded"
+                        style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxyHKKiDj7LpLKA6boJdh_H2sK68f4nFF_T-idl7L0rPFMB1INhQ); height: 100px">
+                    </div>
+                    <div class="card-body">
+                        <img class="card-profile-img img-rounded mx-auto d-block profile_pic"
+                            style="margin: auto; height:100px; width:100px; border-radius: 50px; align-self: auto;"
+                            src="../../static/hoopfinder/img/profile_img/user-15.jpg">
+                        <div id="editProfilePic" style="display:none;">Edit profile picture</div>
+
+                        <div class="h5 text-capitalize text-center mb-4 mt-2">{{ user.first_name }} {{user.last_name}}
+                        </div>
+                        <div class="h7 text-muted text-capitalize">Fullname : {{ user.first_name }}
+                            {{user.last_name}}</div>
+                        <div class="h7"> Dont imitate, understand
+                        </div>
+
+                        {% if user.id != request.session.userid %}
+                        <div class="btn-group mt-3">
+                            <button type="submit" class="btn btn-primary">Follow</button>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="" class="h6 text-muted"><i class="fa fa-users mr-3" id="licons"></i>
+                                Followers <span class="badge badge-info float-right h4">5.2</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="" class="h6 text-muted"><i class="fa fa-user mr-3 ml-1"></i>
+                                Following <span class="badge badge-primary float-right h4">51</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="/users/{{ user.id }}/messages" class="h6 text-muted"><i
+                                    class="fa fa-comments mr-3"></i>
+                                Messages <span class="badge badge-warning float-right h4">0</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="" class="h6 text-muted"><i class="fa fa-basketball-ball mr-3"></i>
+                                Favorite Courts <span class="badge badge-success float-right h4">8</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="col-md-6 gedf-main">
+
+                <!--- \\\\\\\Post-->
+                <div class="card gedf-card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
+                                    aria-controls="posts" aria-selected="true">Make
+                                    a Review</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
+                                    aria-selected="false" href="#images">Images</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="posts" role="tabpanel"
+                                aria-labelledby="posts-tab">
+                                <form action="/add_user_review" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <input type="hidden" name="reviewed_user" value="{{user.id}}">
+                                        <label class="sr-only" for="message">post</label>
+                                        <textarea name="review" class="form-control" id="message" rows="3"
+                                            placeholder="What are you thinking?"></textarea>
+                                    </div>
+                            </div>
+                            <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                                <div class="form-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile">
+                                        <label class="custom-file-label" for="customFile">Upload image</label>
+                                    </div>
+                                </div>
+                                <div class="py-4"></div>
+                            </div>
+                        </div>
+                        <div class="btn-toolbar justify-content-between">
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-primary">Post a Review</button>
+                            </div>
+                            </form> <!-- End of the form  -->
+                            <div class="btn-group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-globe"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                                    <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-users"></i> Friends</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Just me</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Post /////-->
+
+
+
+
+                <!--- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+                <!-- -------------- Reviews will Load via AJAX--------------- -->
+                <!--- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+                <div class="reviews"></div>
+
+                <!-- Post /////-->
+            </div>
+
+            <div class="col-md-3">
+                <ul class="media-list media-list-users list-group">
+                    <li class="list-group-item">
+                        <div class="media w-100">
+                            <!-- <img class="media-object rounded-circle mr-3"
+                                src="../../static/hoopfinder/img/profile_img/avatar-fat.jpg"> -->
+                            <div class="media-body align-self-center">
+                                <strong>Jacob Thornton</strong>
+                                <small>@fat - San Francisco</small>
+                                <button class="btn btn-outline-primary btn-sm float-right">
+                                    <span class="fa fa-user-plus"></span> Follow
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="media w-100">
+                            <!-- <img class="media-object rounded-circle mr-3"
+                                src="../../static/hoopfinder/img/profile_img/avatar-mdo.png"> -->
+                            <div class="media-body align-self-center">
+                                <strong>Dave Gamache</strong>
+                                <small>@dhg - Palo Alto</small>
+                                <button class="btn btn-outline-primary btn-sm float-right">
+                                    <span class="fa fa-user-plus"></span> Follow
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="media w-100">
+                            <!-- <img class="media-object rounded-circle mr-3"
+                                src="../../static/hoopfinder/img/usericon4.png"> -->
+                            <div class="media-body align-self-center">
+                                <button class="btn btn-outline-primary btn-sm float-right">
+                                        <span class="fa fa-user-plus"></span> Follow
+                                    </button>
+                                <strong>Mark Otto</strong>
+                                <small>@mdo - San Francisco</small>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-group-item" style="background-color:#eeeeee">
+                        <div class="">
+                            <!-- <img class="media-object rounded-circle mr-3"
+                                src="../../static/hoopfinder/img/usericon4.png"> -->
+                            <div class="media-body align-self-center">
+
+                                <small>Hoops @vinsonaiono copyright @MVP productions</small>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>
+
+<!-- Script for ajax loading -->
+<script src="../../static/hoopfinder/js/userspage.js"></script>

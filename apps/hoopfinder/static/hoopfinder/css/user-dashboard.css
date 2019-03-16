@@ -1,6 +1,9 @@
 .wrapper{
     margin-top: 90px;
 }
+body{
+    background-color: ghostwhite;
+}
 
 .main{
     border: 1px solid;

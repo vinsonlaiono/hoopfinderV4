@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hoops</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/darkly/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-w+8Gqjk9Cuo6XH9HKHG5t5I1VR4YBNdPt/29vwgfZR485eoEJZ8rJRbm3TR32P6k" crossorigin="anonymous">
+
+        
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!------ Include the above in your HEAD tag ---------->
+        
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script src="dist/toolkit.min.js"></script>
+        <link href="dist/toolkit.min.css" rel="stylesheet">
+        
+    <link rel="stylesheet" href="../../static/hoopfinder/css/searchbar.css">
+    <link rel="stylesheet" href="../../static/hoopfinder/css/chat_room.css">
+    <!------ Load Static Files  -->
+    {% load static %}
+    <script src="{% static 'hoopfinder/js/sweetalert.js' %}"></script>
+    <script src="{% static 'user/dist' %}"></script>
+    <script src="{% static 'hoopfinder/dist/sweetalert2.all.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="sweetalert2.min.js"></script>
+    <script src="/apps/hoopfinder/static/hoopfinder/js/sweetalert.js"></script>
+
+    <style>
+        body {
+            background-color: #eeeeee;
+        }
+
+        .h7 {
+            font-size: 0.8rem;
+        }
+
+        .gedf-wrapper {
+            margin-top: 5.5rem;
+        }
+
+        /* css for Large size */
+        @media (min-width: 992px) {
+            .gedf-main {
+                padding-left: .5rem;
+                padding-right: .5rem;
+            }
+
+            .gedf-card {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* css for Medium size */
+        @media (max-width: 991px) {
+            .h6 {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* css for Small size */
+        @media (max-width: 750px) {
+            .h6 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /**Reset Bootstrap*/
+        .dropdown-toggle::after {
+            content: none;
+            display: none;
+        }
+
+        
+
+    </style>
+</head>
+
+<body>
+    <div class="fixed-top">
+        <nav class="navbar navbar-dark bg-dark justify-content-around">
+            <div class="container">
+                <a href="#" class="navbar-brand">Hoops</a>
+                <form class="form-inline">
+                    <div class="input-group">
+                        <div class="searchbar">
+                            <input class="search_input text-white" type="text" name="" placeholder="Search...">
+                            <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
+                        </div>
+                        <div class="dropdown mt-2 ml-2">
+                            <a class="btn btn-dark dropdown-toggle text-capitalize" href="#" role="button"
+                                id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ loggedInUser.first_name }} {{ loggedInUser.last_name }}
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="/user/{{request.session.userid}}">Home</span></a>
+                                <a class="dropdown-item" href="/user_dashboard">Users</a>
+                                <a class="dropdown-item" href="#">Account Settings</a>
+                                <a class="dropdown-item" href="/courts">Courts</a>
+                                <a class="dropdown-item" href="/map">Maps</a>
+                                {% if request.session.userid == 0 %}
+                                <a class="dropdown-item" href="/login">Login</a>
+                                {% else %}
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
+    <div class="container gedf-wrapper">
+        <div class="row">
+            <div class="col-md-3 fixed-left">
+                <div class="card card-profile">
+                    <div class="card-header"
+                        style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxyHKKiDj7LpLKA6boJdh_H2sK68f4nFF_T-idl7L0rPFMB1INhQ); height: 100px">
+                    </div>
+                    <div class="card-body">
+                        <img class="card-profile-img rounded mx-auto d-block"
+                            style="margin: auto; height:100px; width:100px; border-radius: 50px; align-self: auto;"
+                            src="../../static/hoopfinder/img/profile_img/user-15.jpg">
+                        <div class="h5 text-capitalize text-center mb-4">{{ user.first_name }} {{user.last_name}}</div>
+                        <div class="h7 text-muted text-capitalize">Fullname : {{ user.first_name }}
+                            {{user.last_name}}</div>
+                        <div class="h7"> Dont imitate, understand
+                        </div>
+                        {% if user.id != request.session.userid %}
+                        <div class="btn-group mt-3">
+                            <button type="submit" class="btn btn-primary">Follow</button>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a href="" class="h6 text-muted"><i class="fa fa-users mr-3" id="licons"></i>
+                                Followers <span class="badge badge-info float-right h4">5.2</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="" class="h6 text-muted"><i class="fa fa-user mr-3"></i>
+                                Following <span class="badge badge-primary float-right h4">51</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="" class="h6 text-muted"><i class="fa fa-comments mr-3"></i>
+                                Messages <span class="badge badge-warning float-right h4">0</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="" class="h6 text-muted"><img src="../../static/hoopfinder/img/basketball_court.png"
+                                    class="mr-3" />
+                                Favorite Courts <span class="badge badge-success float-right h4">8</span>
+                            </a>
+                        </li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
+
+                </div>
+            </div>
+            <div class="col-md-9 gedf-main">
+
+                <!-- beggining of -->
+
+                <!-- beginning of messing -->
+
+                <!-- end of messing -->
+                <div class="messaging">
+                    <div class="inbox_msg">
+                        <div class="inbox_people">
+                            <div class="headind_srch">
+                                <div class="recent_heading">
+                                    <h4>Recent</h4>
+                                </div>
+                                <div class="srch_bar">
+                                    <div class="stylish-input-group">
+                                        <input type="text" class="search-bar" placeholder="Search">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inbox_chat scroll">
+                                <div class="chat_list active_chat">
+                                    <div class="chat_people">
+                                        <div class="chat_img"> <img
+                                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                        </div>
+                                        <div class="chat_ib">
+                                            <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                            <p>Test, which is a new approach to have all solutions
+                                                astrology under one roof.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat_list">
+                                    <div class="chat_people">
+                                        <div class="chat_img"> <img
+                                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                        </div>
+                                        <div class="chat_ib">
+                                            <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                            <p>Test, which is a new approach to have all solutions
+                                                astrology under one roof.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat_list">
+                                    <div class="chat_people">
+                                        <div class="chat_img"> <img
+                                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                        </div>
+                                        <div class="chat_ib">
+                                            <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                            <p>Test, which is a new approach to have all solutions
+                                                astrology under one roof.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat_list">
+                                    <div class="chat_people">
+                                        <div class="chat_img"> <img
+                                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                        </div>
+                                        <div class="chat_ib">
+                                            <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                            <p>Test, which is a new approach to have all solutions
+                                                astrology under one roof.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat_list">
+                                    <div class="chat_people">
+                                        <div class="chat_img"> <img
+                                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                        </div>
+                                        <div class="chat_ib">
+                                            <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                            <p>Test, which is a new approach to have all solutions
+                                                astrology under one roof.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat_list">
+                                    <div class="chat_people">
+                                        <div class="chat_img"> <img
+                                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                        </div>
+                                        <div class="chat_ib">
+                                            <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                            <p>Test, which is a new approach to have all solutions
+                                                astrology under one roof.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chat_list">
+                                    <div class="chat_people">
+                                        <div class="chat_img"> <img
+                                                src="https://ptetutorials.com/images/user-profile.png" alt="sunil">
+                                        </div>
+                                        <div class="chat_ib">
+                                            <h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+                                            <p>Test, which is a new approach to have all solutions
+                                                astrology under one roof.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mesgs">
+                            <div class="msg_history">
+                                <div class="incoming_msg">
+                                    <div class="incoming_msg_img"> <img
+                                            src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                    <div class="received_msg">
+                                        <div class="received_withd_msg">
+                                            <p>Test which is a new approach to have all
+                                                solutions</p>
+                                            <span class="time_date"> 11:01 AM | June 9</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="outgoing_msg">
+                                    <div class="sent_msg">
+                                        <p>Test which is a new approach to have all
+                                            solutions</p>
+                                        <span class="time_date"> 11:01 AM | June 9</span>
+                                    </div>
+                                </div>
+                                <div class="incoming_msg">
+                                    <div class="incoming_msg_img"> <img
+                                            src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                    <div class="received_msg">
+                                        <div class="received_withd_msg">
+                                            <p>Test, which is a new approach to have</p>
+                                            <span class="time_date"> 11:01 AM | Yesterday</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="outgoing_msg">
+                                    <div class="sent_msg">
+                                        <p>Apollo University, Delhi, India Test</p>
+                                        <span class="time_date"> 11:01 AM | Today</span>
+                                    </div>
+                                </div>
+                                <div class="incoming_msg">
+                                    <div class="incoming_msg_img"> <img
+                                            src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                                    <div class="received_msg">
+                                        <div class="received_withd_msg">
+                                            <p>We work directly with our designers and suppliers,
+                                                and sell direct to you, which means quality, exclusive
+                                                products, at a price anyone can afford.</p>
+                                            <span class="time_date"> 11:01 AM | Today</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="type_msg">
+                                <div class="input_msg_write">
+                                    <input type="text" class="write_msg" placeholder="Type a message" />
+                                    <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane"
+                                            aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--- \\\\\\\Post-->
+                
+                <!-- Post /////-->
+
+                <!--- \\\\\\\Post-->
+
+                {% for rev in all_reviews %}
+
+                <div class="card gedf-card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="mr-2">
+                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                </div>
+                                <div class="ml-2">
+                                    <a href="/user/{{ rev.reviewed_by.id}}">
+                                        <div class="h5 m-0">@<span>{{ rev.reviewed_by.first_name }}</span>
+                                    </a>
+                                    <span class="muted h7"> reviewed</span> <span class="text-capitalize muted h7">
+                                        {{ rev.reviewed_user.first_name }}
+                                        {{ rev.reviewed_user.last_name|slice:"1" }}</span></div>
+                                <!-- <div class="h7 text-muted">Miracles Lee Cross</div> -->
+                            </div>
+                        </div>
+                        <div>
+                            <div class="dropdown">
+                                <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                    <div class="h6 dropdown-header">Configuration</div>
+                                    <a class="dropdown-item" href="#">Save</a>
+                                    <!-- Show Delete option if loggedin user created the review -->
+                                    <a class="dropdown-item delete_review" href="#"
+                                        url="/review/delete/{{ rev.id }}/{{ user.id }}">Delete</a>
+                                    <a class="dropdown-item" href="#">Hide</a>
+                                    <a class="dropdown-item" href="#">Report</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
+                    <a class="card-link" href="#">
+                        <!-- <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adip.</h5> -->
+                    </a>
+
+                    <p class="card-text">
+                        <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos
+                                ipsa
+                                praesentium esse magnam nemo dolor
+                                sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates. -->
+                        {{ rev.review }}
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-link"><i class="fa fa-thumbs-up"></i> Like</a>
+                    <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                    <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+                </div>
+                {% endfor %}
+                <!-- Post /////-->
+            </div>
+
+        </div>
+
+        
+    </div>
+    </div>
+</body>
+
+</html>

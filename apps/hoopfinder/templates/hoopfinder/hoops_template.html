@@ -1,0 +1,194 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foundation | Welcome</title>
+  <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+  <link rel="stylesheet" href="../static/hoopfinder/css/userboot.css">
+  <link rel="stylesheet" href="../static/hoopfinder/css/user-dashboard.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="dist/toolkit.min.js"></script>
+  <link href="dist/toolkit.min.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="../static/hoopfinder/img/usericon2.png"> -->
+  {% load static %}
+  <!-- LOAD all sweet alert -->
+  <script src="{% static 'hoopfinder/js/sweetalert.js' %}"></script>
+  <script src="{% static 'user/dist' %}"></script>
+  <script src="{% static 'hoopfinder/dist/sweetalert2.all.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+  <script src="sweetalert2.min.js"></script>
+  <script src="/apps/hoopfinder/static/hoopfinder/js/sweetalert.js"></script>
+
+
+</head>
+
+<body>
+  <div class="container">
+
+
+    <div class="fixed-top">
+      <nav class="nav justify-content-around navbar navbar-dark bg-dark">
+        <li class="nav-item" style="margin-right:10%">
+          <a class="nav-link active" id="navItem" href="/home">HOOPS</a>
+        </li>
+        <li>
+          <div class="dropdown">
+            <a class="btn btn-dark dropdown-toggle text-capitalize" href="#" role="button" id="dropdownMenuLink"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ loggedInUser.first_name }} {{ loggedInUser.last_name }}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="/user/{{request.session.userid}}">Home</span></a>
+              <a class="dropdown-item" href="/user_dashboard">Users</a>
+              <a class="dropdown-item" href="#">Account Settings</a>
+              <a class="dropdown-item" href="/courts">Courts</a>
+              <a class="dropdown-item" href="/map">Maps</a>
+              {%if request.session.userid == 0 %}
+              <a class="dropdown-item" href="/login">Login</a>
+              {% else %}
+              <a class="dropdown-item" href="/logout">Logout</a>
+              {% endif %}
+            </div>
+          </div>
+        </li>
+      </nav>
+    </div>
+
+    <div class="off-canvas-wrapper" class="mt-4" style="margin-top:90px;">
+      <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+        <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
+          <div class="row column">
+            <br>
+            <img class="thumbnail" src="https://placehold.it/550x350">
+            <h5 class="p-4">Mike Mikerson</h5>
+            <p class="p-4">Duis aliquet egestas purus in blandit. Curabitur vulputate, ligula lacinia scelerisque
+              tempor, lacus lacus
+              ornare ante, ac egestas est urna sit amet arcu. Class aptent taciti sociosqu ad litora torquent per
+              conubia
+              nostra, per inceptos himenaeos. Sed molestie augue sit amet leo.</p>
+          </div>
+        </div>
+        <div class="off-canvas-content" data-off-canvas-content>
+          <div class="title-bar hide-for-large">
+            <div class="title-bar-left">
+              <button class="menu-icon" type="button" data-open="my-info"></button>
+              <span class="title-bar-title">Mike Mikerson</span>
+            </div>
+          </div>
+          <div class="callout primary">
+            <div class="row column">
+              <h1>Hello! This is the portfolio of a very witty person.</h1>
+              <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna
+                ultricies ac tempor dui sagittis. In condimentum facilisis porta. Sed nec diam eu diam mattis viverra.
+                Nulla fringilla.</p>
+            </div>
+          </div>
+          <div class="row small-up-2 medium-up-3 large-up-4">
+            <div class="column">
+              <img class="thumbnail" src="https://placehold.it/550x550">
+              <h5>My Site</h5>
+            </div>
+            <div class="column">
+              <img class="thumbnail" src="https://placehold.it/550x550">
+              <h5>My Site</h5>
+            </div>
+            <div class="column">
+              <img class="thumbnail" src="https://placehold.it/550x550">
+              <h5>My Site</h5>
+            </div>
+            <div class="column">
+              <img class="thumbnail" src="https://placehold.it/550x550">
+              <h5>My Site</h5>
+            </div>
+            <div class="column">
+              <img class="thumbnail" src="https://placehold.it/550x550">
+              <h5>My Site</h5>
+            </div>
+            <div class="column">
+              <img class="thumbnail" src="https://placehold.it/550x550">
+              <h5>My Site</h5>
+            </div>
+            <div class="column">
+              <img class="thumbnail" src="https://placehold.it/550x550">
+              <h5>My Site</h5>
+            </div>
+            <div class="column">
+              <img class="thumbnail" src="https://placehold.it/550x550">
+              <h5>My Site</h5>
+            </div>
+            <div class="column">
+              <img class="thumbnail" src="https://placehold.it/550x550">
+              <h5>My Site</h5>
+            </div>
+            <div class="column">
+              <img class="thumbnail" src="https://placehold.it/550x550">
+              <h5>My Site</h5>
+            </div>
+            <div class="column">
+              <img class="thumbnail" src="https://placehold.it/550x550">
+              <h5>My Site</h5>
+            </div>
+            <div class="column">
+              <img class="thumbnail" src="https://placehold.it/550x550">
+              <h5>My Site</h5>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="medium-6 columns">
+              <h3>Contact Me</h3>
+              <p>Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh
+                porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor.
+                Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor.</p>
+              <ul class="menu">
+                <li><a href="#">Dribbble</a></li>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Yo</a></li>
+              </ul>
+            </div>
+            <div class="medium-6 columns">
+              <label>Name
+                <input type="text" placeholder="Name">
+              </label>
+              <label>Email
+                <input type="text" placeholder="Email">
+              </label>
+              <label>
+                Message
+                <textarea placeholder="holla at a designerd"></textarea>
+              </label>
+              <input type="submit" class="button expanded" value="Submit">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </div>
+</body>
+
+</html>
