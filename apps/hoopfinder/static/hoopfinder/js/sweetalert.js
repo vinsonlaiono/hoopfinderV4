@@ -35,7 +35,7 @@
         console.log("This is the function vinson ")
     })
     // Set the profile picture the github username image
-    $('.profile_pic').click(function() {
+    $('.profile_picture').click(function() {
       console.log("Images Clicked")
       Swal.fire({
           title: 'Submit your Github username',

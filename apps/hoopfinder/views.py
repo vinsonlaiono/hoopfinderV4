@@ -123,10 +123,12 @@ def login_post(request):
             # change this to user dashboard done
             print("youre logged in " + user1.first_name)
             return redirect('/user/'+str(user1.id))
+
 # ------------------------------------
 # LOG USER OUT AND CLEAR SESSION
 #------------------------------------
 def logout(request):
+    print("user has logged out.")
     request.session.clear()
     return redirect('/home')
 
@@ -290,13 +292,16 @@ def userdashboard(request):
         'all_users': all_users,
         'all_new_users': all_new_users
     }
-    return render(request, "hoopfinder/usersNew.html", context)
+    return render(request, "hoopfinder/usersNew1.html", context)
 #-------------------
 # Renders page to show chat_room app
 #-------------------
 def chat_room(request, id):
     loggedInUser = User.objects.get(id=request.session['userid'])
+    user = User.objects.get(id = id)
+
     context= {
+        'user': user,
         'loggedInUser': loggedInUser,
     }
     return render(request, 'hoopfinder/messaging.html', context)
@@ -322,3 +327,12 @@ def ajaxReviews(request, user_id):
             'all_reviews': all_reviews
         }
         return render(request, 'hoopfinder/reviews.html', context)
+#-------------------
+# AJAX call to get all courts for courts page
+#-------------------
+def ajaxCourts(request):
+    all_courts = Courts.objects.all()
+    context = {
+        "all_courts": all_courts,
+    }
+    return render(request, "hoopfinder/jqueryCourts.html", context)

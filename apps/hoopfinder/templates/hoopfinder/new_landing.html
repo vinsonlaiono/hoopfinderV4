@@ -8,20 +8,25 @@
     <title>HoopFinder</title>
     <link rel="stylesheet" type="text/css" href="../../static/hoopfinder/css/landing.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"
+        async></script>
 
     <link rel="stylesheet" href="../static/hoopfinder/css/userboot.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -35,6 +40,16 @@
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="sweetalert2.min.js"></script>
     <script src="/apps/hoopfinder/static/hoopfinder/js/sweetalert.js"></script>
+
+
+    <!-- ---------------------------- -->
+    <link rel="stylesheet" type="text/css" href="../../static/hoopfinder/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/hoopfinder/css//demo.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/hoopfinder/css//set1.css" />
+    <link rel="stylesheet" type="text/css" href="../../static/font-awesome-4.2.0/css/font-awesome.min.css" />
+
+    <script src="../../static/hoopfinder/js/classie.js"></script>
+
 
     <script>
 
@@ -50,8 +65,9 @@
             </div>
         </div>
         <nav class="navbar navbar-dark bg-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent"
-                aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <h4 class="h3"><a href="/" class="text-decoration-none text-white">Hoops</a></h4>
@@ -86,20 +102,41 @@
                     <!-- ====================== -->
                     <form action="/login_post" method="POST" id="regForm">
                         {% csrf_token %}
+                        <!--  -->
+                        <section class="content bgcolor-1">
+                            
+                            <span class="input input--haruki">
+                                <input class="input__field input__field--haruki" type="text" id="input-2" name="email"/>
+                                <label class="input__label input__label--haruki" for="input-2">
+                                    <span class="input__label-content input__label-content--haruki">Last Name</span>
+                                </label>
+                            </span>
+                            <span class="input input--haruki">
+                                    <input class="input__field input__field--haruki" type="text" id="input-3"  name="password"/>
+                                    <label class="input__label input__label--haruki" for="input-3">
+                                        <span class="input__label-content input__label-content--haruki">Email</span>
+                                    </label>
+                                </span>
+                        </section>
+                        <!--  -->
                         <!-- EMAIL VALIDATION ------------------------------------------------------------------------ -->
-                        <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true" class="iconmargin"></i></span>
-                                    <input type="email" class="form-control form-control-sm" name="email" placeholder="email">
-                                </div>
+                        <!-- <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"
+                                        class="iconmargin"></i></span>
+                                <input type="email" class="form-control form-control-sm" name="email"
+                                    placeholder="email">
                             </div>
-                            <!-- PASSWORD ERROR ----------------------------------------------------------------------- -->
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span id="iconmargin" class="input-group-addon"><i class="fa fa-lock fa" aria-hidden="true" class="iconmargin"></i></span>
-                                    <input type="password" class="form-control form-control-sm" name="password" placeholder="password">
-                                </div>
+                        </div> -->
+                        <!-- PASSWORD ERROR ----------------------------------------------------------------------- -->
+                        <!-- <div class="form-group">
+                            <div class="input-group">
+                                <span id="iconmargin" class="input-group-addon"><i class="fa fa-lock fa"
+                                        aria-hidden="true" class="iconmargin"></i></span>
+                                <input type="password" class="form-control form-control-sm" name="password"
+                                    placeholder="password">
                             </div>
+                        </div> -->
                         <!-- CONFRIM PASSWORD ERROR ----------------------------------------------------------------------- -->
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -144,7 +181,8 @@
                         <!-- EMAIL VALIDATION ------------------------------------------------------------------------ -->
 
                         <div class="form-group">
-                            <input type="text" name="email" id="email" class="form-control" value="" placeholder="Email">
+                            <input type="text" name="email" id="email" class="form-control" value=""
+                                placeholder="Email">
                         </div>
                         <!-- PASSWORD ERROR ----------------------------------------------------------------------- -->
 
@@ -154,7 +192,8 @@
                         <!-- CONFRIM PASSWORD ERROR ----------------------------------------------------------------------- -->
 
                         <div class="form-group">
-                            <input type="text" name="confpassword" class="form-control" value="" placeholder="Confirm Password">
+                            <input type="text" name="confpassword" class="form-control" value=""
+                                placeholder="Confirm Password">
                         </div>
 
                         <div class="modal-footer">
@@ -171,6 +210,46 @@
         </div>
     </div>
 
+
+
+
+    <!-- ********************************************************************** -->
+
 </body>
 
 </html>
+<script>
+        (function() {
+            // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+            if (!String.prototype.trim) {
+                (function() {
+                    // Make sure we trim BOM and NBSP
+                    var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+                    String.prototype.trim = function() {
+                        return this.replace(rtrim, '');
+                    };
+                })();
+            }
+
+            [].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
+                // in case the input is already filled..
+                if( inputEl.value.trim() !== '' ) {
+                    classie.add( inputEl.parentNode, 'input--filled' );
+                }
+
+                // events:
+                inputEl.addEventListener( 'focus', onInputFocus );
+                inputEl.addEventListener( 'blur', onInputBlur );
+            } );
+
+            function onInputFocus( ev ) {
+                classie.add( ev.target.parentNode, 'input--filled' );
+            }
+
+            function onInputBlur( ev ) {
+                if( ev.target.value.trim() === '' ) {
+                    classie.remove( ev.target.parentNode, 'input--filled' );
+                }
+            }
+        })();
+    </script>

@@ -9,29 +9,29 @@
     <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.3.1/darkly/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-w+8Gqjk9Cuo6XH9HKHG5t5I1VR4YBNdPt/29vwgfZR485eoEJZ8rJRbm3TR32P6k" crossorigin="anonymous">
 
-        
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!------ Include the above in your HEAD tag ---------->
-        
-        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
         integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src="dist/toolkit.min.js"></script>
-        <link href="dist/toolkit.min.css" rel="stylesheet">
-        
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="dist/toolkit.min.js"></script>
+    <link href="dist/toolkit.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="../../static/hoopfinder/css/searchbar.css">
     <link rel="stylesheet" href="../../static/hoopfinder/css/chat_room.css">
     <!------ Load Static Files  -->
@@ -89,8 +89,6 @@
             display: none;
         }
 
-        
-
     </style>
 </head>
 
@@ -132,13 +130,15 @@
         <div class="row">
             <div class="col-md-3 fixed-left">
                 <div class="card card-profile">
-                    <div class="card-header"
-                        style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxyHKKiDj7LpLKA6boJdh_H2sK68f4nFF_T-idl7L0rPFMB1INhQ); height: 100px">
+                    <div class="card-header rounded"
+                        style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxyHKKiDj7LpLKA6boJdh_H2sK68f4nFF_T-idl7L0rPFMB1INhQ); height: 200px">
                     </div>
                     <div class="card-body">
-                        <img class="card-profile-img rounded mx-auto d-block"
-                            style="margin: auto; height:100px; width:100px; border-radius: 50px; align-self: auto;"
-                            src="../../static/hoopfinder/img/profile_img/user-15.jpg">
+                        <div class="card-profile-img img-rounded mx-auto d-block profile_picture bg-secondary pt-4"
+                            style="margin: auto; height:100px; width:100px; border-radius: 50px; align-self: auto">
+                            <p class="h1 text-white text-center text-uppercase">
+                                {{ user.first_name|slice:"1" }}{{user.last_name|slice:"1"}} </p>
+                        </div>
                         <div class="h5 text-capitalize text-center mb-4">{{ user.first_name }} {{user.last_name}}</div>
                         <div class="h7 text-muted text-capitalize">Fullname : {{ user.first_name }}
                             {{user.last_name}}</div>
@@ -344,7 +344,7 @@
                     </div>
                 </div>
                 <!--- \\\\\\\Post-->
-                
+
                 <!-- Post /////-->
 
                 <!--- \\\\\\\Post-->
@@ -413,7 +413,7 @@
 
         </div>
 
-        
+
     </div>
     </div>
 </body>

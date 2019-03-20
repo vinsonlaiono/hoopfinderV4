@@ -1,0 +1,13 @@
+<div class="row">
+    {% for court in all_courts %}
+
+    <div class="col-12 col-sm-6 col-md-4 image-grid-item">
+        <div style="background-image: url({{court.imagelink}});" class="image-grid-cover">
+            <!-- <a href="courts/{{court.id}}"><img src="{{court.imagelink}}" alt=""></a> -->
+            <a href="#" class="image-grid-clickbox"></a>
+            <a href="courts/{{court.id}}" class="cover-wrapper">{{ court.name }}</a>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>

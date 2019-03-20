@@ -43,6 +43,9 @@
     <script src="/apps/hoopfinder/static/hoopfinder/js/sweetalert.js"></script>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="../../static/hoopfinder/js/show_all_courts.js"></script>
+
+    <script src="../../static/hoopfinder/js/sweetalert.js"></script>
 
     <style>
         body {
@@ -79,6 +82,7 @@
         }
 
     </style>
+   
 </head>
 
 <body>
@@ -171,26 +175,17 @@
 
                 <div class="jumbotron mb-4" id="jumbo">
                     <h1 class="display-4 text-center text-white">Basketball Courts</h1>
+                    <br><br><br><br>
+                    <a class="btn btn-outline-secondary float-right addCourt text-white"><i class="fa fa-plus"></i> Add a court</a>
+
                 </div>
 
                 <!--- \\\\\\\Post-->
 
-                <!-- Post /////-->
-
                 <!--- \\\\\\\Post-->
-                <div class="row">
-                    {% for court in all_courts %}
-
-                    <div class="col-12 col-sm-6 col-md-4 image-grid-item">
-                        <div style="background-image: url({{court.imagelink}});" class="image-grid-cover">
-                            <!-- <a href="courts/{{court.id}}"><img src="{{court.imagelink}}" alt=""></a> -->
-                            <a href="#" class="image-grid-clickbox"></a>
-                            <a href="courts/{{court.id}}" class="cover-wrapper">{{ court.name }}</a>
-                        </div>
-                    </div>
-
-                    {% endfor %}
-                </div>
+                <!-- LOADING ALL COURTS THROUGH JQUERY -->
+                <div id="all_courts"></div>
+                
                 <!-- Post /////-->
             </div>
         </div>
@@ -198,3 +193,4 @@
 </body>
 
 </html>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>

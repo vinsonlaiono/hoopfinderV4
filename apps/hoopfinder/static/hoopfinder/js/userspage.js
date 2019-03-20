@@ -8,7 +8,6 @@ $(document).ready( () => {
       })
         .done(function( data ) {
             console.log("In done route")
-            console.log(data)
             $('.reviews').html(data)
         });
 });

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Users</title>
+    <script src="sweetalert2.all.min.js"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 and Android browser -->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <!-- <link rel="stylesheet" href="../static/hoopfinder/css/userboot.css"> -->
+    <link rel="stylesheet" href="../static/hoopfinder/css/user-dashboard.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="dist/toolkit.min.js"></script>
+    <link href="dist/toolkit.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="../static/hoopfinder/img/usericon2.png"> -->
+    <script src="../../static/hoopfinder/js/sweetalert.js"></script>
+    <link rel="stylesheet" href="../../static/hoopfinder/css/searchbar.css">
+    <!-- FONT AWESOME LINK -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div class="fixed-top">
+        <nav class="navbar navbar-dark bg-dark justify-content-around">
+            <div class="container">
+                <a href="#" class="navbar-brand">Hoops</a>
+                <form class="form-inline">
+                    <div class="input-group">
+                        <div class="searchbar">
+                            <input class="search_input text-white" type="text" name="" placeholder="Search...">
+                            <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
+                        </div>
+                        <div class="dropdown mt-2 ml-2">
+                            <a class="btn btn-dark dropdown-toggle text-capitalize" href="#" role="button"
+                                id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ loggedInUser.first_name }} {{ loggedInUser.last_name }}
+                            </a>
+                            <input type="hidden" id="user_id" value="{{ loggedInUser.id }}">
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="/user/{{request.session.userid}}"><i
+                                        class="fa fa-home mr-2"></i>Home</span></a>
+                                <a class="dropdown-item" href="/user_dashboard"><i
+                                        class="fa fa-users mr-2"></i>Users</a>
+                                <a class="dropdown-item" href="#"><i class="fa fa-gear mr-2"></i>Account Settings</a>
+                                <a class="dropdown-item" href="/courts"><i
+                                        class="fa fa-basketball-ball mr-2"></i>Courts</a>
+                                <a class="dropdown-item" href="/map"><i class="fa fa-map-marked mr-2"></i>Maps</a>
+                                {% if request.session.userid == 0 %}
+                                <a class="dropdown-item" href="/login">Login</a>
+                                {% else %}
+                                <a class="dropdown-item" href="/logout"> <i
+                                        class="fa fa-sign-out-alt mr-2"></i>Logout</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </div>
+    <!-- end of nav bar -->
+
+    <div class="container wrapper">
+        <div class="row">
+            <div class="col-4">
+                <div class="left-col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Newest Members</h5>
+                        </div>
+                        <div class="card-body">
+                            {% for users in all_new_users %}
+                            <div style="display: inline-block; vertical-align: middle; margin: 10px;">
+                                <img src="../../static/hoopfinder/img/usericon.png" alt=""
+                                    style="height:50px; width:50px; border-radius: 50px;">
+                                <a href="user/{{users.id}}">
+                                    <p class="text-capitalize" style=" text-align: left; width: 20x; margin: 0px">
+                                        {{users.first_name}}</p>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="all-users-list">
+                    <div class="card" style="width: 48rem;">
+                        <div class="card-header">
+                            <h5 class="card-title">All Users</h5>
+                        </div>
+                        <div id="all_users">
+                            <div class="row">
+                                {% for users in all_users %}
+                                <div class="col-6 mb-2">
+                                    <div class="d-flex flex-row border rounded">
+                                        <div class="card-profile-img img-rounded mx-auto d-block profile_picture bg-secondary pt-4"
+                                            style="margin: auto; height:75px; width:75px; border-radius: 50px; align-self: auto">
+                                            <p class="h4 text-white text-center text-uppercase">
+                                                {{ users.first_name|slice:"1" }}{{users.last_name|slice:"1"}} </p>
+                                        </div>
+                                        <div class="pl-3 pt-2 pr-2 pb-2 w-75 border-left">
+                                            <h4 class="text-info text-capitalize">{{ users.first_name }}
+                                                {{ users.last_name }}</h4>
+                                            <ul class="m-0 float-left" style="list-style: none; margin:0; padding: 0">
+                                                <li><i class="fab fa-facebook-square"></i> Facebook</li>
+                                                <li><i class="fab fa-twitter-square"></i> Twitter</li>
+                                            </ul>
+                                            <p class="text-right m-0"><a href="user/{{users.id }}"
+                                                    class="btn btn-outline-secondary"><i class="far fa-user"></i> View
+                                                    Profile</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+</body>
+
+</html>

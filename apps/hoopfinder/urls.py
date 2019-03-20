@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^user_dashboard$', views.userdashboard),
     url(r'^users/(?P<id>\d+)/messages$', views.chat_room),
     url(r'^reviews/(?P<user_id>\d+)$', views.ajaxReviews),
+    url(r'^ajax_courts$', views.ajaxCourts),
 ] 

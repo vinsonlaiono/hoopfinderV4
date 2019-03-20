@@ -138,6 +138,12 @@
 
             <!-- JUMBOTRON -->
             <div class="col-md-8 gedf-main">
+                    <div class="col-lg-12 mb-2 bg-dark rounded text-white text-center" id="">
+                            <p id="temperaturep" class="text-capitalize">                  
+                                Current Weather:           
+                                <img id="temperatureicon" src="http://openweathermap.org/img/w/{{icon}}.png" alt="">
+                                {{ftemperature|floatformat:2}}°F {{description}}</p> 
+                    </div>
                 <!-- Make the background image of the jumbotron to be the image of the court -->
                 <!-- <div class="jumbotron" id="jumbo" imageLink = "{{ court.imagelink }}">
                     <h1 class="display-4 text-center text-white">Basketball Courts</h1>

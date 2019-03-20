@@ -47,7 +47,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
     <script src="sweetalert2.min.js"></script>
-    
+
     <script src="../../static/hoopfinder/js/sweetalert.js"></script>
 
     <style>
@@ -168,12 +168,15 @@
                         style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQxyHKKiDj7LpLKA6boJdh_H2sK68f4nFF_T-idl7L0rPFMB1INhQ); height: 200px;">
                     </div>
                     <div class="card-body mt-4">
-                        <img class="card-profile-img img-rounded mx-auto d-block profile_pic"
+                        <!-- <img class="card-profile-img img-rounded mx-auto d-block profile_picture"
                             style="margin: auto; height:100px; width:100px; border-radius: 50px; align-self: auto;"
-                            src="../../static/hoopfinder/img/profile_img/user-15.jpg">
-
-                        <div class="h5 text-capitalize text-center mb-4 mt-2">{{ user.first_name }} {{user.last_name}}
+                            src="../../static/hoopfinder/img/profile_img/user-15.jpg"> -->
+                        <div class="card-profile-img img-rounded mx-auto d-block profile_picture bg-secondary pt-4" style="margin: auto; height:100px; width:100px; border-radius: 50px; align-self: auto">
+                            <p class="h1 text-white text-center text-uppercase">{{ user.first_name|slice:"1" }}{{user.last_name|slice:"1"}} </p>
                         </div>
+                            
+                        <div class="h5 text-capitalize text-center mb-4 mt-2 text-capitalize">{{ user.first_name }} {{user.last_name}} 
+                                <i class="text-muted fa fa-pencil-alt"></i></div> 
                         <div class="h7 text-muted text-capitalize">Fullname : {{ user.first_name }}
                             {{user.last_name}}</div>
                         <div class="h7"> Dont imitate, understand
