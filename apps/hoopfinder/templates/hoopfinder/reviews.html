@@ -1,30 +1,100 @@
+<input type="hidden" id="user_id" value="{{ loggedInUser.id }}">
 
-
-
-{% for rev in user_reviews %}
-{% if rev.reviewed_user.id != users.id %}
-
+<!--  TEST REVIEW CARD -->
 <div class="card gedf-card">
     <div class="card-header">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="mr-2">
-                    <!-- <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt=""> -->
-                    <div class="card-profile-img img-rounded mx-auto d-block profile_picture bg-secondary pt-3" style="margin: auto; height:45px; width:45px; border-radius: 50px; align-self: auto">
-                            <p class="h6 text-white text-center text-uppercase">{{ user.first_name|slice:"1" }}{{user.last_name|slice:"1"}} </p>
-                        </div>
+                    {% if rev.reviewed_by.profile_image != " " %}
+                    <img class="rounded-circle" width="45" src="{{ rev.reviewed_by.profile_image }}" alt="">
+                    {% else %}
+                    <div class="card-profile-img img-rounded mx-auto d-block profile_picture bg-secondary pt-3 profile_picture"
+                        style="margin: auto; height:45px; width:45px; border-radius: 50px; align-self: auto">
+                        <p class="h6 text-white text-center text-uppercase">
+                            {{ rev.reviewed_by.first_name|slice:"1" }}{{ rev.reviewed_by.last_name|slice:"1"}} </p>
+                    </div>
+                    {% endif %}
                 </div>
                 <div class="ml-2">
-                    <a href="/user/{{ rev.reviewed_by.id}}"><div class="h5 m-0">@<span>{{ rev.reviewed_by.first_name }}</span></a> 
-                    <span class="muted h7"> reviewed</span> <span class="text-capitalize muted h7"> {{ rev.reviewed_user.first_name }}
-                    {{ rev.reviewed_user.last_name|slice:"1" }}</span></div>
+                    <a href="/user/{{ rev.reviewed_by.id}}">
+                        <div class="h5 m-0">@TestReview</div>
+                </div>
+            </div>
+            <div>
+                <div class="dropdown">
+                    <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                        <div class="h6 dropdown-header">Configuration</div>
+                        <a class="dropdown-item" href="#">Save</a>
+                        <!-- Show Delete option if loggedin user created the review -->
+                        <a class="dropdown-item delete_review"
+                            url="/review/delete/{{ rev.id }}/{{ user.id }}">Delete</a>
+                        <a class="dropdown-item" href="#">Hide</a>
+                        <a class="dropdown-item" href="#">Report</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-body">
+        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
+        <a class="card-link" href="#"> 
+                <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adip.</h5>
+            </a> 
+        <img class="media-object mr-3 align-self-start" src="../../static/hoopfinder/img/hoop2.jpg" width="100%">
+        <p class="card-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam minus quibusdam possimus fugiat consectetur
+            mollitia cum quis explicabo tempore excepturi voluptatum itaque nemo commodi inventore, impedit eum
+            laudantium assumenda reiciendis!
+        </p>
+    </div>
+    <div class="card-footer">
+        <span class="card-link color-success text-primary" id="like_icon" liked='unclicked'><i id="thumbs"
+                class="fa-thumbs-up far"></i> Like</span>
+
+        <a href="#" class="card-link"><i class="far fa-comment"></i> Comment</a>
+        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+    </div>
+</div>
+<!--  END TEST REVIEW CARD -->
+{% if r == "false" %}
+{% for rev in user_reviews %}
+
+
+    <div class="card gedf-card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="mr-2">
+                        {% if rev.reviewed_by.profile_image != " " %}
+                        <img class="rounded-circle" width="45" src="{{ rev.reviewed_by.profile_image }}" alt="">
+                        {% else %}
+                        <div class="card-profile-img img-rounded mx-auto d-block profile_picture bg-secondary pt-3 profile_picture"
+                            style="margin: auto; height:45px; width:45px; border-radius: 50px; align-self: auto">
+                            <p class="h6 text-white text-center text-uppercase">
+                                {{ rev.reviewed_by.first_name|slice:"1" }}{{ rev.reviewed_by.last_name|slice:"1"}} </p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="ml-2">
+                        <a href="/user/{{ rev.reviewed_by.id}}">
+                            <div class="h5 m-0">@<span class="text-lowercase">{{ rev.reviewed_by.first_name }}</span>
+                        </a>
+                        <span class="muted h7"> reviewed</span> <span class="text-capitalize muted h7">
+                            {{ rev.reviewed_user.first_name }}
+                            {{ rev.reviewed_user.last_name|slice:"1" }}</span></div>
                     <!-- <div class="h7 text-muted">Miracles Lee Cross</div> -->
                 </div>
             </div>
             <div>
                 <div class="dropdown">
-                    <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         <i class="fa fa-ellipsis-h"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
@@ -42,19 +112,135 @@
     </div>
     <div class="card-body">
         <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
-        <!-- <a class="card-link" href="#"> -->
-            <!-- <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adip.</h5> -->
-        <!-- </a> -->
+        <!-- <a class="card-link" href="#"> 
+                <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adip.</h5>
+            </a> -->
         <!-- <img class="media-object mr-3 align-self-start" src="../../static/hoopfinder/img/hoop2.jpg"> -->
         <p class="card-text">
             {{ rev.review }}
         </p>
     </div>
     <div class="card-footer">
-        <a href="#" class="card-link color-success"><i class="fa fa-thumbs-up"></i> Like</a>
-        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+        <span class="card-link color-success text-primary" id="like_icon" liked='unclicked'><i id="thumbs"
+                class="fa-thumbs-up far"></i> Like</span>
+        <a href="#" class="card-link"><i class="far fa-comment"></i> Comment</a>
         <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
     </div>
+    </div>
+    {% endfor %}
+
+    {% else %}
+
+    {% for rev in all_reviews %}
+
+    <div class="card gedf-card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="mr-2">
+                        {% if rev.reviewed_by.profile_image != " " %}
+                        <img class="rounded-circle" width="45" src="{{ rev.reviewed_by.profile_image }}" alt="">
+                        {% else %}
+                        <div class="card-profile-img img-rounded mx-auto d-block profile_picture bg-secondary pt-3 profile_picture"
+                            style="margin: auto; height:45px; width:45px; border-radius: 50px; align-self: auto">
+                            <p class="h6 text-white text-center text-uppercase">
+                                {{ rev.reviewed_by.first_name|slice:"1" }}{{ rev.reviewed_by.last_name|slice:"1"}} </p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="ml-2">
+                        <a href="/user/{{ rev.reviewed_by.id}}">
+                            <div class="h5 m-0">@<span class="text-lowercase">{{ rev.reviewed_by.first_name }}</span>
+                        </a>
+                        <span class="muted h7"> reviewed</span> <span class="text-capitalize muted h7">
+                            {{ rev.reviewed_user.first_name }}
+                            {{ rev.reviewed_user.last_name|slice:"1" }}</span></div>
+                    <!-- <div class="h7 text-muted">Miracles Lee Cross</div> -->
+                </div>
+            </div>
+            <div>
+                <div class="dropdown">
+                    <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-ellipsis-h"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                        <div class="h6 dropdown-header">Configuration</div>
+                        <a class="dropdown-item" href="#">Save</a>
+                        <!-- Show Delete option if loggedin user created the review -->
+                        <a class="dropdown-item delete_review" url="/review/delete/{{ rev.id }}/{{ user.id }}">Delete</a>
+                        <a class="dropdown-item" href="#">Hide</a>
+                        <a class="dropdown-item" href="#">Report</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-body">
+        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
+        <!-- <a class="card-link" href="#"> 
+                <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adip.</h5>
+            </a> -->
+        <!-- <img class="media-object mr-3 align-self-start" src="../../static/hoopfinder/img/hoop2.jpg"> -->
+        <p class="card-text">
+            {{ rev.review }}
+        </p>
+    </div>
+    <div class="card-footer">
+        <span class="card-link color-success text-primary" id="like_icon" liked='unclicked'><i id="thumbs"
+                class="fa-thumbs-up far"></i> Like</span>
+        <a href="#" class="card-link"><i class="far fa-comment"></i> Comment</a>
+        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+    </div>
+    </div>
+    {% endfor %}
+
+    {% endif %}
+
+<div class="alert alert-dark text-center" role="alert">
+    <a href=""> Show more reviews</a>
 </div>
-{% endif %}
-{% endfor %}
+<script src="../../static/hoopfinder/js/sweetalert.js"></script>
+<script>
+    $(document).ready(() => {
+        console.log("On document.ready")
+        $('#like_icon').hover(function () {
+            $(this).css('cursor', 'pointer')
+        })
+
+        $('#like_icon').click(function () {
+            if ($(this).attr('liked') == 'unclicked') {
+                console.log("comment was liked")
+                $('#thumbs').removeClass('far').addClass('fa')
+                $(this).attr('liked', 'clicked')
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                Toast.fire({
+                    type: 'success',
+                    title: 'You liked a review'
+                })
+            } else {
+                $('#thumbs').removeClass('fa').addClass('far')
+                $(this).attr('liked', 'unclicked')
+                console.log("comment was unliked")
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+
+                Toast.fire({
+                    type: 'warning',
+                    title: 'You unliked a review'
+                })
+            }
+        })
+    })
+</script>

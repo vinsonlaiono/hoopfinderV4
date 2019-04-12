@@ -1,0 +1,76 @@
+body {
+    background-color: #eeeeee;
+}
+
+.h7 {
+    font-size: 0.8rem;
+}
+
+.gedf-wrapper {
+    margin-top: 6rem;
+}
+
+.prof_img {
+    margin: auto;
+    height: 75px;
+    width: 75px;
+    border-radius: 50px;
+}
+
+@media (max-width: 1023px) {
+    #side_nav {
+        width: 250px;
+        position: fixed;
+        z-index: 1;
+        left: 89px;
+        left: 24px;
+    }
+}
+
+/* css for Large size */
+@media (min-width: 992px) {
+    .gedf-main {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .gedf-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* css for Medium size */
+@media (max-width: 991px) {
+    .h6 {
+        font-size: 0.7rem;
+    }
+    
+}
+
+/* css for Small size */
+@media (max-width: 750px) {
+    .h6 {
+        font-size: 1.5rem;
+    }
+
+    .gedf-card {
+        margin-bottom: 1rem;
+    }
+
+    .list-group {
+        margin-top: 1rem;
+    }
+    .r-random-users{
+        display: none;
+    }
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/**Reset Bootstrap*/
+.dropdown-toggle::after {
+    content: none;
+    display: none;
+}

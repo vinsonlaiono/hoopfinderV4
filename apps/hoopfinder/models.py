@@ -63,6 +63,7 @@ class User(models.Model):
     email = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
     # users player information
+    profile_image = models.CharField(max_length=100)
     position = models.CharField(max_length=255, default=" ")
     age = models.CharField(max_length=255, default=" ")
     feet = models.CharField(max_length=255, default=" ")
@@ -96,5 +97,29 @@ class UserReviews(models.Model):
     review = models.TextField()
     reviewed_user = models.ForeignKey(User, related_name="personal_reviews")
     reviewed_by = models.ForeignKey(User, related_name="user_reviews")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Followers(models.Model):
+    user_id = models.TextField()
+    following = models.ForeignKey(User, related_name="following")
+    # followers = models.ForeignKey(User, related_name="followers")
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name='Date Created')
+    date_updated = models.DateTimeField(null=True, blank=True)
+    is_follow =  models.BooleanField(default=True, verbose_name='Followed')
+
+    # class Meta:
+    #     ordering = ('-created')
+    # def __str__(self):
+    #     return self.name
+    
+   
+
+class Event(models.Model):
+    name = models.CharField(max_length=255)
+    date = models.DateField()
+    time = models.CharField(max_length=255)
+    court = models.ForeignKey(Courts, related_name="court_events")
+    created_by = models.ForeignKey(User, related_name="created_events")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

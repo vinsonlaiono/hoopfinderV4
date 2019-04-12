@@ -3,7 +3,7 @@ from .models import *
 from django.contrib import messages
 from django.http import JsonResponse
 from django.views import View
-import json, requests
+import json, requests, random
 
 # MAKE AN EDIT USER page
 # MAKE SURE THE DATABASE IS ALL CONNECTED TO EACH OTHER
@@ -235,16 +235,38 @@ def user_page(request, user_id):
     if request.session['userid'] == 0:
         return redirect('/home')
     else:
+        all_users = User.objects.all()
         loggedInUser = User.objects.get(id=request.session['userid'])
         user = User.objects.get(id = user_id)
         user_reviews = UserReviews.objects.filter(reviewed_user = User.objects.get(id = user_id)).order_by('-created_at')
         all_reviews = UserReviews.objects.order_by('-created_at')
-        print(user_reviews, "***********************")
+        print("In user_page route in views.py")
+        print(all_users[9], "***********************")
+
+        # Query for list of all the hoopers that current logged in user is following
+        current_users_following = Followers.objects.get(user_id=request.session['userid'])
+
+        print("*"*80)
+        print("This user is currently following these users: ", current_users_following)
+
+        print(current_users_following.user_id)
+        print(current_users_following.following)
+        print("*"*80)
+        # Create a list of 10 random users
+        rand_users = []
+        for x in range(10):
+            randNum = random.randint(1, len(all_users)-1)
+            rand_users.append(all_users[randNum])
+            # print("**********************************************")
+            # print("List of random users", rand_users)
+            # print("**********************************************")
+
         context= {
             'user': user,
             'user_reviews': user_reviews,
             'loggedInUser' : loggedInUser,
-            'all_reviews': all_reviews
+            'all_reviews': all_reviews,
+            'rand_users': rand_users
         }
         return render(request, "hoopfinder/userbootstrap1.html", context)
 # -----------------------------------
@@ -310,7 +332,7 @@ def chat_room(request, id):
 # AJAX call to get all reviews for users page
 #-------------------
 
-def ajaxReviews(request, user_id):
+def ajaxReviews(request, user_id, review_feed="all_reviews"):
     print("User id in session is: " + str(request.session['userid']))
     if request.session['userid'] == 0:
         return redirect('/home')
@@ -320,12 +342,19 @@ def ajaxReviews(request, user_id):
         user_reviews = UserReviews.objects.filter(reviewed_user = User.objects.get(id = user_id)).order_by('-created_at')
         all_reviews = UserReviews.objects.order_by('-created_at')
         print(user_reviews, "rev: ***********************")
+        if review_feed == "user_reviews":
+            r = "false"
+        else :
+            r = "true"
         context= {
             'user': user,
             'user_reviews': user_reviews,
             'loggedInUser' : loggedInUser,
-            'all_reviews': all_reviews
+            'all_reviews': all_reviews,
+            'r': r
         }
+
+
         return render(request, 'hoopfinder/reviews.html', context)
 #-------------------
 # AJAX call to get all courts for courts page
@@ -336,3 +365,94 @@ def ajaxCourts(request):
         "all_courts": all_courts,
     }
     return render(request, "hoopfinder/jqueryCourts.html", context)
+
+#-------------------
+# UPDATE THE USERS ABOUT ME DATA
+#-------------------
+def updateUser(request):
+    if request.method == "POST":
+        user = User.objects.get(id = request.POST['id'])
+
+        print("USER:", user)
+        print("ID: ",request.POST['id'])
+        print("Position: ",request.POST['position'])
+        print("Profile Image: ",request.POST.get('profile_image'))
+        print("Age: ",request.POST['age'])
+        print("Feet: ",request.POST['feet'])
+        print("Inches: ",request.POST['inches'])
+        print("City: ",request.POST['city'])
+        print("State: ",request.POST['state'])
+        print("IN post route")
+
+        if request.POST.get('profile_image') == None:
+            user.profile_image = " "
+        else:
+            user.profile_image = request.POST['profile_image']
+        user.position = request.POST['position']
+        user.age = request.POST['age']
+        user.feet = request.POST['feet']
+        user.inches = request.POST['inches']
+        user.city = request.POST['city']
+        user.state = request.POST['state']
+        user.save()
+        
+    return redirect('/user/'+request.POST['id'])
+
+#-------------------
+# UPDATE THE USERS PROFILE IMAGE
+#-------------------
+def updateProfileImage(request):
+    if request.method == "POST":
+        print("In GET route of update Profile Image", image_url)
+        user = User.objects.get(id = request.session['userid'])
+        user.profile_image = image_url
+        user.save()
+
+    return redirect('/user/'+request.session['userid'])
+
+# -------------------
+# POST ROUTE TO ADD AN EVENT TO THE COURT
+# -------------------
+def add_event_process(request, court_id):
+    if request.method == 'POST':
+        user = User.objects.get(id = request.session['userid'])
+        court = Courts.objects.get(id = court_id)
+        name = request.POST['title']
+        date = request.POST['date']
+        time = request.POST['time']
+
+        Event.objects.create(name = name, date = date, time = time, court = court, created_by = user)
+
+    return redirect('/courts/'+ court_id)
+
+# -------------------
+# FOLLOWING API
+# -------------------
+def follow_API(request, followed_id, follower_id):
+    if request.method == 'GET':
+        print("*"*60)
+        print("Followed_id: "+followed_id)
+        print("Follower_id: "+follower_id)
+
+        follower = User.objects.get(id=follower_id)
+        followed = User.objects.get(id=followed_id)
+
+        print("*"*60)
+        print(follower.first_name + " is following " + followed.first_name)
+        print("*"*60)
+
+        f = Followers.objects.filter(user_id = follower_id)
+        if len(f) == 0:
+            print("User does not have a followers class...creating followers class")
+            Followers.objects.create(user_id = follower_id, following = followed)
+        else:
+            print("Adding " + followed.first_name + " to following list")
+            # f.following.add(followed)
+            
+            print("***$$$***", follower.following)
+            u =f[0]
+            print("This is f's followers: ",u.user_id)
+            print("This is f's followers: ",u.following)
+            u.following.add(followed)
+
+        return redirect('/reviews/'+follower_id+'/all_reviews')

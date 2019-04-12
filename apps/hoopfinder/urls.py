@@ -2,7 +2,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^djan$', views.index),  
+    url(r'^djan$', views.home),  
     url(r'^home$', views.home),  
     url(r'^home/test$', views.home_test),  
     url(r'^courts$', views.courts),
@@ -25,6 +25,9 @@ urlpatterns = [
     url(r'^review/delete/(?P<id>\d+)/(?P<userid>\d+)$', views.delete_player_review),
     url(r'^user_dashboard$', views.userdashboard),
     url(r'^users/(?P<id>\d+)/messages$', views.chat_room),
-    url(r'^reviews/(?P<user_id>\d+)$', views.ajaxReviews),
+    url(r'^reviews/(?P<user_id>\d+)/(?P<review_feed>\w+)$', views.ajaxReviews),
     url(r'^ajax_courts$', views.ajaxCourts),
+    url(r'^updateUserInfo$', views.updateUser),
+    url(r'^user/(?P<image_url>\w+)$', views.updateProfileImage),
+    url(r'^followAPI/(?P<followed_id>\d+)/(?P<follower_id>\d+)$', views.follow_API),
 ] 

@@ -27,6 +27,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="../../static/hoopfinder/css/profile_card.css">
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="dist/toolkit.min.js"></script>
@@ -51,6 +53,19 @@
                             <input class="search_input text-white" type="text" name="" placeholder="Search...">
                             <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
                         </div>
+                        <div class="ml-4 mt-2">
+                                {% if loggedInUser.profile_image != " " %}
+                                <img class="card-profile-img img-rounded mx-auto d-block profile_picture prof_img"
+                                    style="height: 40px; width:40px;" width="45" src="{{ loggedInUser.profile_image }}"
+                                    alt="">
+                                {% else %}
+                                <div class="card-profile-img img-rounded mx-auto d-block profile_picture bg-secondary pt-3 profile_picture"
+                                    style="margin: auto; height:45px; width:45px; border-radius: 50px; align-self: auto">
+                                    <p class="h6 text-white text-center text-uppercase">
+                                        {{ loggedInUser.first_name|slice:"1" }}{{ loggedInUser.last_name|slice:"1"}} </p>
+                                </div>
+                                {% endif %}
+                            </div>
                         <div class="dropdown mt-2 ml-2">
                             <a class="btn btn-dark dropdown-toggle text-capitalize" href="#" role="button"
                                 id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -92,10 +107,18 @@
                         <div class="card-body">
                             {% for users in all_new_users %}
                             <div style="display: inline-block; vertical-align: middle; margin: 10px;">
-                                <img src="../../static/hoopfinder/img/usericon.png" alt=""
-                                    style="height:50px; width:50px; border-radius: 50px;">
+                                    {% if users.profile_image != " " %}
+                                    <img class="card-profile-img img-rounded mx-auto d-block prof_img"
+                                        width="45" src="{{ users.profile_image }}" alt="" style="margin: auto; height:65px; width:65px; border-radius: 50px; align-self: auto">
+                                    {% else %}
+                                    <div class="card-profile-img img-rounded mx-auto d-block profile_picture bg-secondary pt-3 profile_picture"
+                                        style="margin: auto; height:65px; width:65px; border-radius: 50px; align-self: auto">
+                                        <p class="h3 text-white text-center text-uppercase">
+                                            {{ users.first_name|slice:"1" }}{{ users.last_name|slice:"1"}} </p>
+                                    </div>
+                                    {% endif %}
                                 <a href="user/{{users.id}}">
-                                    <p class="text-capitalize" style=" text-align: left; width: 20x; margin: 0px">
+                                    <p class="text-capitalize" style=" text-align: center;  margin: 0px">
                                         {{users.first_name}}</p>
                                 </a>
                             </div>
@@ -116,11 +139,16 @@
                                 {% for users in all_users %}
                                 <div class="col-6 mb-2">
                                     <div class="d-flex flex-row border rounded">
-                                        <div class="card-profile-img img-rounded mx-auto d-block profile_picture bg-secondary pt-4"
-                                            style="margin: auto; height:75px; width:75px; border-radius: 50px; align-self: auto">
-                                            <p class="h4 text-white text-center text-uppercase">
-                                                {{ users.first_name|slice:"1" }}{{users.last_name|slice:"1"}} </p>
-                                        </div>
+                                            {% if users.profile_image != " " %}
+                                            <img class="card-profile-img img-rounded mx-auto d-block prof_img"
+                                                width="45" src="{{ users.profile_image }}" alt="" style="margin: auto; height:65px; width:65px; border-radius: 50px; align-self: auto">
+                                            {% else %}
+                                            <div class="card-profile-img img-rounded mx-auto d-block profile_picture bg-secondary pt-3 profile_picture"
+                                                style="margin: auto; height:65px; width:65px; border-radius: 50px; align-self: auto">
+                                                <p class="h3 text-white text-center text-uppercase">
+                                                    {{ users.first_name|slice:"1" }}{{ users.last_name|slice:"1"}} </p>
+                                            </div>
+                                            {% endif %}
                                         <div class="pl-3 pt-2 pr-2 pb-2 w-75 border-left">
                                             <h4 class="text-info text-capitalize">{{ users.first_name }}
                                                 {{ users.last_name }}</h4>

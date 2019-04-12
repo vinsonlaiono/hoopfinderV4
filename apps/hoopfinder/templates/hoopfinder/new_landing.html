@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=\, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>HoopFinder</title>
-    <link rel="stylesheet" type="text/css" href="../../static/hoopfinder/css/landing.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../../static/hoopfinder/css/landing.css"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"
         async></script>
 
-    <link rel="stylesheet" href="../static/hoopfinder/css/userboot.css">
+    <!-- <link rel="stylesheet" href="../static/hoopfinder/css/userboot.css"> -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
@@ -47,17 +47,124 @@
     <link rel="stylesheet" type="text/css" href="../../static/hoopfinder/css//demo.css" />
     <link rel="stylesheet" type="text/css" href="../../static/hoopfinder/css//set1.css" />
     <link rel="stylesheet" type="text/css" href="../../static/font-awesome-4.2.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../static/hoopfinder/css/footer.css">
 
     <script src="../../static/hoopfinder/js/classie.js"></script>
 
 
-    <script>
+    <style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            font-family: 'Overpass', sans-serif;
+            letter-spacing: 0px;
+            font-size: 17px;
+            color: #8d8f90;
+            font-weight: 400;
+            line-height: 32px;
+            background-color: #edefef;
+        }
 
-    </script>
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #25292a;
+            margin: 0px 0px 10px 0px;
+            font-family: 'Overpass', sans-serif;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1;
+        }
+
+        h1 {
+            font-size: 34px;
+        }
+
+        h2 {
+            font-size: 28px;
+            line-height: 38px;
+        }
+
+        h3 {
+            font-size: 22px;
+            line-height: 32px;
+        }
+
+        h4 {
+            font-size: 20px;
+        }
+
+        h5 {
+            font-size: 17px;
+        }
+
+        h6 {
+            font-size: 12px;
+        }
+
+        p {
+            margin: 0 0 20px;
+            line-height: 1.7;
+        }
+
+        p:last-child {
+            margin: 0px;
+        }
+
+        ul,
+        ol {}
+
+        a {
+            text-decoration: none;
+            color: #8d8f90;
+            -webkit-transition: all 0.3s;
+            -moz-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+        a:focus,
+        a:hover {
+            text-decoration: none;
+            color: #f85759;
+        }
+
+        .page-header {
+            background: url('../../static/hoopfinder/img/landing_assets/beachCourt.jpg')no-repeat center center fixed;
+            position: relative;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            height: 700px;
+        }
+
+        .page-caption {
+            padding-top: 170px;
+            padding-bottom: 174px;
+        }
+
+        .card-section {
+            position: relative;
+            bottom: 70px;
+        }
+
+        .card-block {
+            padding: 80px;
+        }
+
+        .section-title {
+            margin-bottom: 60px;
+        }
+
+    </style>
 </head>
 
 <body>
-    <div class="pos-f-t">
+    <div class="pos-f-t sticky-top">
         <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-dark p-4">
                 <h5 class="text-white h4">Collapsed content</h5>
@@ -77,15 +184,71 @@
                 <button class="btn btn-secondary mr-2" data-toggle="modal" data-target="#exampleModal">Sign Up</button>
                 {% else %}
                 <a href="/user/{{ request.session.userid }}" class="btn btn-secondary mr-2">Home</a>
-                <a href="/logout" class="btn btn-secondary mr-2">Log out</a>
+                <a href="/logout" class="btn btn-secondary mr-2">Logout</a>
                 {% endif %}
             </div>
         </nav>
     </div>
-    <div id="landing-header">
-        <h1>Welcome to Hoops</h1>
-        <a href="/home" class="btn btn-lg btn-secondary">Check The Courts</a>
+    <!-- =================== MAIN BODY ========================== -->
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="page-caption">
+                        <div class="mb-4">
+
+                            <a href="/home" class=" text-white display-1 text-right">Hoops</a>
+                            <p class="text-white h4 mb-4">Its simple. Type in a the city you are in and see where all
+                                the hoopers are.</p>
+                        </div>
+
+                        <div class="input-group mt-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white text-muted" id="inputGroupPrepend2"><span
+                                        class="fa fa-search fa-2x bg-white p-2"></span></span>
+                            </div>
+                            <input type="text" class="form-control form-control-lg p-4 text-muted"
+                                id="validationDefaultUsername" placeholder="Where do you want to hoop..."
+                                aria-describedby="inputGroupPrepend2">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- /.page-header-->
+    <!-- news -->
+    <div class="card-section">
+        <div class="container">
+            <div class="card-block bg-white mb30">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <!-- section-title -->
+                        <div class="section-title mb-0">
+                            <h2>All about Hoops. We share our knowledge of where we hoop</h2>
+                            <p>Our approach is very simple: Find where hoopers are hooping and go there. </p>
+                        </div>
+                        <!-- /.section-title -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center">
+                    Created for <a
+                        href="https://easetemplate.com/downloads/digital-marketing-website-template-hike-bold-design/"
+                        target="_blank">easetemplate by @mvp_productions</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <!-- SECTION -->
+
+    <div class="row my-4" style="height:100px;  background-color: rgb(164, 160, 160);"></div>
+
+    <!-- =================== MAIN BODY END ====================== -->
     <div class="modal modal-fade-transform: scale(.8) fade" id="loginModal" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -104,19 +267,21 @@
                         {% csrf_token %}
                         <!--  -->
                         <section class="content bgcolor-1">
-                            
+
                             <span class="input input--haruki">
-                                <input class="input__field input__field--haruki" type="text" id="input-2" name="email"/>
+                                <input class="input__field input__field--haruki" type="text" id="input-2"
+                                    name="email" />
                                 <label class="input__label input__label--haruki" for="input-2">
-                                    <span class="input__label-content input__label-content--haruki">Last Name</span>
+                                    <span class="input__label-content input__label-content--haruki">Email</span>
                                 </label>
                             </span>
                             <span class="input input--haruki">
-                                    <input class="input__field input__field--haruki" type="text" id="input-3"  name="password"/>
-                                    <label class="input__label input__label--haruki" for="input-3">
-                                        <span class="input__label-content input__label-content--haruki">Email</span>
-                                    </label>
-                                </span>
+                                <input class="input__field input__field--haruki" type="password" id="input-3"
+                                    name="password" />
+                                <label class="input__label input__label--haruki" for="input-3">
+                                    <span class="input__label-content input__label-content--haruki">Password</span>
+                                </label>
+                            </span>
                         </section>
                         <!--  -->
                         <!-- EMAIL VALIDATION ------------------------------------------------------------------------ -->
@@ -214,42 +379,120 @@
 
 
     <!-- ********************************************************************** -->
+    <!-- FOOTER -->
+    <!-- ********************************************************************** -->
+    <!-- footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row ">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                    <div class="ft-logo display-3 text-white">Hoops
+                    </div>
+                </div>
+            </div>
+            <hr class="footer-line">
+            <div class="row ">
+                <!-- footer-about -->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 ">
+                    <div class="footer-widget ">
+                        <div class="footer-title">Company</div>
+                        <ul class="list-unstyled">
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Support</a></li>
+                            <li><a href="#">Press</a></li>
+                            <li><a href="#">Legal & Privacy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.footer-about -->
+                <!-- footer-links -->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 ">
+                    <div class="footer-widget ">
+                        <div class="footer-title">Quick Links</div>
+                        <ul class="list-unstyled">
+                            <li><a href="#">News</a></li>
+                            <li><a href="#">Contact us</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.footer-links -->
+                <!-- footer-links -->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-6 ">
+                    <div class="footer-widget ">
+                        <div class="footer-title">Social</div>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Twitter</a></li>
+                            <li><a href="#">Google +</a></li>
+                            <li><a href="#">Linked In</a></li>
+                            <li><a href="#">Facebook</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.footer-links -->
+                <!-- footer-links -->
+                <div class="col-xl-3 col-lg-3 col-md-12 col-sm-6 col-6 ">
+                    <div class="footer-widget ">
+                        <h3 class="footer-title">Subscribe Newsletter</h3>
+                        <form>
+                            <div class="newsletter-form">
+                                <input class="form-control" placeholder="Enter Your Email address" type="text">
+                                <button class="btn btn-default btn-sm" type="submit">Go</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.footer-links -->
+                <!-- tiny-footer -->
+            </div>
+            <div class="row ">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center ">
+                    <div class="tiny-footer">
+                        <p>Copyright © All Rights Reserved 2020 | Template Design & Development by <a
+                                href="https://easetemplate.com/downloads/bitcoin-cryptocurrency-website-template-amazing-design "
+                                target="_blank" class="copyrightlink">@mvp_productions</a></p>
+                    </div>
+                </div>
+                <!-- /. tiny-footer -->
+            </div>
+        </div>
+    </div>
 
 </body>
 
 </html>
 <script>
-        (function() {
-            // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
-            if (!String.prototype.trim) {
-                (function() {
-                    // Make sure we trim BOM and NBSP
-                    var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-                    String.prototype.trim = function() {
-                        return this.replace(rtrim, '');
-                    };
-                })();
+    (function () {
+        // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+        if (!String.prototype.trim) {
+            (function () {
+                // Make sure we trim BOM and NBSP
+                var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+                String.prototype.trim = function () {
+                    return this.replace(rtrim, '');
+                };
+            })();
+        }
+
+        [].slice.call(document.querySelectorAll('input.input__field')).forEach(function (inputEl) {
+            // in case the input is already filled..
+            if (inputEl.value.trim() !== '') {
+                classie.add(inputEl.parentNode, 'input--filled');
             }
 
-            [].slice.call( document.querySelectorAll( 'input.input__field' ) ).forEach( function( inputEl ) {
-                // in case the input is already filled..
-                if( inputEl.value.trim() !== '' ) {
-                    classie.add( inputEl.parentNode, 'input--filled' );
-                }
+            // events:
+            inputEl.addEventListener('focus', onInputFocus);
+            inputEl.addEventListener('blur', onInputBlur);
+        });
 
-                // events:
-                inputEl.addEventListener( 'focus', onInputFocus );
-                inputEl.addEventListener( 'blur', onInputBlur );
-            } );
+        function onInputFocus(ev) {
+            classie.add(ev.target.parentNode, 'input--filled');
+        }
 
-            function onInputFocus( ev ) {
-                classie.add( ev.target.parentNode, 'input--filled' );
+        function onInputBlur(ev) {
+            if (ev.target.value.trim() === '') {
+                classie.remove(ev.target.parentNode, 'input--filled');
             }
-
-            function onInputBlur( ev ) {
-                if( ev.target.value.trim() === '' ) {
-                    classie.remove( ev.target.parentNode, 'input--filled' );
-                }
-            }
-        })();
-    </script>
+        }
+    })();
+</script>
