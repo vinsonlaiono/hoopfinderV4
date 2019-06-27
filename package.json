@@ -1,0 +1,24 @@
+{
+  "name": "hoopfinderv4",
+  "version": "1.0.0",
+  "description": "",
+  "main": "nodeServer.js",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "sweetalert2": "^8.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinsonlaiono/hoopfinderV4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vinsonlaiono/hoopfinderV4/issues"
+  },
+  "homepage": "https://github.com/vinsonlaiono/hoopfinderV4#readme"
+}

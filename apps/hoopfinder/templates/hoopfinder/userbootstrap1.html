@@ -53,7 +53,7 @@
 
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
-    
+
     <style>
         .card-section {
             position: relative;
@@ -64,36 +64,43 @@
             position: relative;
             bottom: 55px;
         }
-        .offset-fixed{
+
+        .offset-fixed {
             position: fixed;
             top: 0;
             bottom: 0;
         }
-        .f-left{
+
+        .f-left {
             left: 100px;
             top: 100px;
         }
-        .f-right{
+
+        .f-right {
             right: 0;
         }
-        .side-left{
+
+        .side-left {
             margin-top: 10rem;
             margin-left: 20.07rem
         }
-        .side-right{
+
+        .side-right {
             margin-top: 4rem;
             overflow-x: hidden;
             overflow-y: auto;
             height: calc(100vh - 7.5rem);
         }
-        @media (min-width: 1200px){
+
+        @media (min-width: 1200px) {
             .container {
                 max-width: 1125px;
             }
-            .c-navbar{
+            .c-navbar {
                 margin-left: 7rem !important;
             }
         }
+
     </style>
 
 </head>
@@ -193,8 +200,8 @@
                         <ul class="list-group list-group-flush">
                             {% if request.session.userid == user.id %}
                             <li class="list-group-item">
-                                <span class="h6 text-muted my_feed color-success" feedType="all_users" style="cursor: pointer"><i
-                                        class="far fa-newspaper mr-3" id="licons"></i>
+                                <span class="h6 text-muted my_feed color-success" feedType="all_users"
+                                    style="cursor: pointer"><i class="far fa-newspaper mr-3" id="licons"></i>
                                     Feed <span class="badge badge-danger float-right h4">2 unseen</span>
                                 </span>
                             </li>
@@ -203,7 +210,7 @@
                                 <!-- <a href="/user/{{request.session.userid}}" class="h6 text-muted"><i -->
                                 <span class="h6 text-muted my_feed" feedType="user_reviews" style="cursor: pointer">
                                     <i class="fa fa-newspaper mr-3 " id="licons"></i>
-                                    My Feed 
+                                    My Feed
                                 </span>
                             </li>
                             {% endif %}
@@ -233,11 +240,11 @@
                             <li class="list-group-item">
                                 <a href="" class="h6 text-muted"><i class="fa fa-user-circle mr-3"></i>
                                     About
-                                    
+
                                     <a href="" data-toggle="modal" data-target="#exampleModalLong"> <i
-                                        class="text-muted fa fa-pencil-alt float-right"></i></a>
-                                        
-                                    </a>
+                                            class="text-muted fa fa-pencil-alt float-right"></i></a>
+
+                                </a>
                                 {% if request.session.userid == user.id %}
                                 {% endif %}
                                 <div class="pl-4 pt-2 m-0">
@@ -424,26 +431,28 @@
                     <li class="list-group-item">
                         <div class="media w-100">
                             {% if user.profile_image != " " %}
-                            <img class="rounded-circle mx-auto d-block pt-3 " width="45" src="{{ user.profile_image }}" alt="">
+                            <img class="rounded-circle mx-auto d-block pt-3 " width="45" src="{{ user.profile_image }}"
+                                alt="">
                             {% else %}
                             <div class="card-profile-img img-rounded mx-auto d-block profile_picture bg-secondary pt-3 profile_picture"
-                            style="margin: auto; height:45px; width:45px; border-radius: 50px; align-self: auto">
-                            <p class="h6 text-white text-center text-uppercase">
-                                {{ user.first_name|slice:"1" }}{{ user.last_name|slice:"1"}} </p>
+                                style="margin: auto; height:45px; width:45px; border-radius: 50px; align-self: auto">
+                                <p class="h6 text-white text-center text-uppercase">
+                                    {{ user.first_name|slice:"1" }}{{ user.last_name|slice:"1"}} </p>
                             </div>
                             {% endif %}
-                            
-                            
+
+
                             <div class="media-body align-self-center">
                                 <strong class="text-capitalize ml-2">{{user.first_name}} {{ user.last_name }}</strong>
-                                <button type="submit" class="btn btn-outline-primary btn-sm float-right follow_button" followedID="{{ user.id }}"
-                                followerID="{{ request.session.userid }}"><span
-                                class="fa fa-user-plus mr-2"></span>Follow</button>
-                                <small class="d-block ml-2">@<span class="text-lowercase"> {{ user.first_name }}</span> - {{ user.city }}</small>
+                                <button type="submit" class="btn btn-outline-primary btn-sm float-right follow_button"
+                                    followedID="{{ user.id }}" followerID="{{ request.session.userid }}"><span
+                                        class="fa fa-user-plus mr-2"></span>Follow</button>
+                                <small class="d-block ml-2">@<span class="text-lowercase"> {{ user.first_name }}</span>
+                                    - {{ user.city }}</small>
                             </div>
                         </div>
                     </li>
-                    
+
                     {% endfor %}
 
                     <li class="list-group-item" style="background-color:#eeeeee">

@@ -49,7 +49,11 @@
     <link rel="stylesheet" type="text/css" href="../../static/font-awesome-4.2.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="../../static/hoopfinder/css/footer.css">
 
+    <link rel="stylesheet" href="bootstrap-social.css">
+
     <script src="../../static/hoopfinder/js/classie.js"></script>
+
+    <script src="../../static/hoopfinder/js/fbLogin.js"></script>
 
 
     <style>
@@ -267,21 +271,37 @@
                         {% csrf_token %}
                         <!--  -->
                         <section class="content bgcolor-1">
-
-                            <span class="input input--haruki">
+                            <div class="form-group">
+                                <input type="text" name="email" class="form-control" value="" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                    <input type="text" name="password" class="form-control" value="" placeholder="Password">
+                                </div>
+                            <!-- <span class="input input--haruki">
                                 <input class="input__field input__field--haruki" type="text" id="input-2"
                                     name="email" />
                                 <label class="input__label input__label--haruki" for="input-2">
                                     <span class="input__label-content input__label-content--haruki">Email</span>
                                 </label>
-                            </span>
-                            <span class="input input--haruki">
+                            </span> -->
+                            <!-- <span class="input input--haruki">
                                 <input class="input__field input__field--haruki" type="password" id="input-3"
                                     name="password" />
                                 <label class="input__label input__label--haruki" for="input-3">
                                     <span class="input__label-content input__label-content--haruki">Password</span>
                                 </label>
-                            </span>
+                            </span> -->
+                            <div class="btn-facebook"></div>
+                            <!-- <fb:login-button  scope="public_profile,email" onlogin="checkLoginState();">
+                            </fb:login-button> -->
+                            <div class="text-center border border-dark border-left-0 border-right-0 my-4 py-3">
+                                <span class="h6 text-muted"> OR </span>
+                            </div>
+                            <a class="btn btn-primary col-12 text-white">
+                                <span class="fa fa-facebook text-white"></span> Sign in with Facebook
+                            </a>
+                            <div id="status">
+                            </div>
                         </section>
                         <!--  -->
                         <!-- EMAIL VALIDATION ------------------------------------------------------------------------ -->

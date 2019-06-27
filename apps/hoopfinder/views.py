@@ -40,6 +40,9 @@ def home(request):
 #  RENDER HOME PAGE
 #------------------------------------
 def home_test(request):
+    """
+    
+    """
     if 'userid' not in request.session:
         request.session['userid'] = 0
     if 'courtid' not in request.session:

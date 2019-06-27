@@ -2,7 +2,8 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^djan$', views.home),  
+    # url(r'^djan$', views.home),  
+    url(r'^$', views.home),  
     url(r'^home$', views.home),  
     url(r'^home/test$', views.home_test),  
     url(r'^courts$', views.courts),
