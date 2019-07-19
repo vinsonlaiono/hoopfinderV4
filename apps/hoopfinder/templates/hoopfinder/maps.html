@@ -47,17 +47,17 @@
     var infowindow;
 
     function initMap() {
-      var pyrmont = { lat: 37.376628, lng: -121.909902 };
+      var myLongLat = { lat: 37.376628, lng: -121.909902 };
 
       map = new google.maps.Map(document.getElementById('map'), {
-        center: pyrmont,
+        center: myLongLat,
         zoom: 12
       });
 
       infowindow = new google.maps.InfoWindow();
       var service = new google.maps.places.PlacesService(map);
       service.nearbySearch({
-        location: pyrmont,
+        location: myLongLat,
         radius: 100000,
         type: ['park']
       }, callback);
@@ -70,6 +70,23 @@
         }
       }
     }
+
+    function getLatLngByZipcode(zipcode) {
+      var geocoder = new google.maps.Geocoder();
+      var address = zipcode;
+      geocoder.geocode({ 'address': address }, function (results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+              var latitude = results[0].geometry.location.lat();
+              var longitude = results[0].geometry.location.lng();
+              alert("Latitude: " + latitude + "\nLongitude: " + longitude);
+          } else {
+              alert("Request failed.")
+          }
+      });
+      return [latitude, longitude];
+    }
+    console.log("This is the zip code converted to long and lat: ", getLatLngByZipcode(95636))
+    
 
     function createMarker(place) {
       var placeLoc = place.geometry.location;
@@ -131,7 +148,6 @@
   <div id="map"></div>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8Sw3z2wRdW13zEv9A6TYZqgzP7QCcNYk&libraries=places&callback=initMap"
     async defer></script>
-  </div>
 </body>
 
 </html>
